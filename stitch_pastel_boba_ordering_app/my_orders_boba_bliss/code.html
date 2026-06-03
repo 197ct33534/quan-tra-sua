@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Boba Bliss | Order History</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#a1d0c1",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#ffb7ce",
+                    "surface-bright": "#fff8f6",
+                    "on-tertiary-container": "#59554e",
+                    "surface-tint": "#864d61",
+                    "tertiary": "#625e56",
+                    "tertiary-fixed": "#e8e2d8",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#d0cac1",
+                    "secondary-fixed": "#bceddc",
+                    "secondary-container": "#bceddc",
+                    "surface-container-highest": "#e9e1de",
+                    "on-secondary-fixed-variant": "#214e43",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#3a675a",
+                    "primary-fixed-dim": "#fab3ca",
+                    "on-tertiary-fixed-variant": "#4a463f",
+                    "on-secondary-fixed": "#002019",
+                    "surface-container": "#f5ece9",
+                    "outline": "#837377",
+                    "inverse-surface": "#342f2e",
+                    "surface-dim": "#e1d8d5",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#fbf2ef",
+                    "surface": "#fff8f6",
+                    "on-primary-container": "#7b4458",
+                    "outline-variant": "#d5c2c6",
+                    "on-primary-fixed": "#360b1e",
+                    "primary-fixed": "#ffd9e3",
+                    "background": "#fff8f6",
+                    "primary": "#864d61",
+                    "error": "#ba1a1a",
+                    "inverse-primary": "#fab3ca",
+                    "inverse-on-surface": "#f8efec",
+                    "surface-variant": "#e9e1de",
+                    "surface-container-high": "#efe6e3",
+                    "on-surface-variant": "#514347",
+                    "on-primary-fixed-variant": "#6a364a",
+                    "tertiary-fixed-dim": "#ccc6bc",
+                    "on-tertiary-fixed": "#1e1b16",
+                    "on-background": "#1e1b19",
+                    "on-secondary-container": "#406d60",
+                    "on-surface": "#1e1b19"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "lg": "40px",
+                    "margin-mobile": "20px",
+                    "base": "8px",
+                    "margin-desktop": "auto",
+                    "gutter": "16px",
+                    "md": "24px",
+                    "xl": "64px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .boba-loader {
+            display: flex;
+            gap: 4px;
+        }
+        .boba-pearl {
+            width: 8px;
+            height: 8px;
+            background-color: #864d61;
+            border-radius: 50%;
+            animation: boba-bounce 0.6s infinite alternate;
+        }
+        .boba-pearl:nth-child(2) { animation-delay: 0.2s; }
+        .boba-pearl:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes boba-bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-8px); }
+        }
+        .soft-card-shadow {
+            shadow-[0px_10px_30px_rgba(74,69,67,0.05)];
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim w-full sticky top-0 z-50 shadow-[0px_10px_30px_rgba(74,69,67,0.05)]">
+<div class="flex justify-between items-center px-margin-mobile md:px-lg h-16 w-full max-w-[1200px] mx-auto">
+<div class="flex items-center gap-base">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+<span class="hidden md:block font-label-md text-label-md text-on-surface-variant">Seattle, WA</span>
+</div>
+<h1 class="font-headline-md text-headline-md-mobile md:text-headline-md text-primary dark:text-primary-fixed-dim">Boba Bliss</h1>
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A professional and friendly portrait of a young woman with a warm smile, set against a soft, out-of-focus cafe background. The lighting is bright and airy, reflecting a clean light-mode aesthetic. Her appearance is stylish yet approachable, perfectly aligning with the modern, high-end boutique brand identity of a premium tea shop. The overall color palette is dominated by soft creams and gentle pastels." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB7Nip8nbteQma6Q99wRUIBmeOxs36VhYCGWZFJsYzBiVSmvUDgc7PZ4MHdXOoLuuN5nFkhYY8V1yF0ZeAv_O3JWbaa3XIpTpVEPfOYtPlFftbdjb8iPrEA9KttSuvFE_93-2-Ua2M5Z2sX00g3cxe1BDY2XEkYX_gc0SSnf9kMSUQQkPgXYJlPnW70AuemdYK9G_4oozGW8Ffa1wtKC3egh7Bl55whxrLM-zIBiGpUGyGwvh0E9RZzfNZ3NfYYFkMM2ik5dmIFmD7"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-margin-mobile md:px-lg py-md md:py-lg mb-24">
+<!-- Page Title & Filter -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-xl">
+<div class="space-y-xs">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Order History</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Review and reorder your favorite sips.</p>
+</div>
+<!-- Horizontal Filter Chips -->
+<div class="flex gap-sm overflow-x-auto pb-xs scrollbar-hide">
+<button class="whitespace-nowrap px-md py-sm bg-primary text-on-primary rounded-full font-label-md text-label-md active:scale-95 transition-transform duration-200">
+                    All Orders
+                </button>
+<button class="whitespace-nowrap px-md py-sm bg-surface-container text-on-surface-variant rounded-full font-label-md text-label-md hover:bg-secondary-container/20 active:scale-95 transition-transform duration-200">
+                    In Progress
+                </button>
+<button class="whitespace-nowrap px-md py-sm bg-surface-container text-on-surface-variant rounded-full font-label-md text-label-md hover:bg-secondary-container/20 active:scale-95 transition-transform duration-200">
+                    Completed
+                </button>
+</div>
+</div>
+<!-- Order List -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-md">
+<!-- Order Item 1: Active -->
+<div class="group bg-surface-container-lowest rounded-[32px] p-md md:p-xl shadow-[0px_10px_30px_rgba(74,69,67,0.05)] border border-transparent hover:border-primary-container transition-all duration-300">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-md">
+<div class="flex items-start gap-md">
+<div class="relative w-20 h-20 md:w-24 md:h-24 bg-tertiary-fixed rounded-2xl overflow-hidden flex-shrink-0">
+<img alt="Brown Sugar Boba" class="w-full h-full object-cover" data-alt="A macro photograph of a decadent Brown Sugar Milk Tea with visible tiger stripes of syrup on the sides of the glass cup. The drink is topped with a generous layer of creamy foam and large, glossy black tapioca pearls at the bottom. The lighting is soft and natural, emphasizing the rich textures and warm brown tones. The background is a clean, minimalist cafe setting with a focus on high-end food presentation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYdbu2zZSdK8WScXCrVFO4Dp8PN7BYE6JshrRHlTSnNfmqo9GbmBbR1UFfpkQ6vhvAf1jIYtY86YCdkK7F6pLzzrwtewXgBmOP9n9TFeaoZFeM2igyt2BxIqhMVCi5KkXwHbxaVpf_qw1zipQrtIEkvgWt2Mh2HyhmCk9dnf33kZtfJyuyFfDhyyynp3wPWYEnamRtoFWP3j5vUvdmRHf9s1JuahIHy4i8AUxH-gl0g6J3j02pew1vBuhXDaByjVthYFqrIy3QRLAS"/>
+<div class="absolute inset-0 bg-black/5"></div>
+</div>
+<div class="space-y-xs">
+<div class="flex items-center gap-sm">
+<span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full font-label-sm text-label-sm flex items-center gap-xs">
+<span class="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse"></span>
+                                    Preparing
+                                </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Order #9283</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Brown Sugar Bliss &amp; 1 more</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">25% Sugar, Less Ice, Oat Milk</p>
+<p class="font-label-md text-label-md text-primary pt-xs">Scheduled for 4:30 PM Today</p>
+</div>
+</div>
+<div class="flex lg:flex-col items-center lg:items-end justify-between gap-sm">
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-on-surface">$14.50</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">2 items</p>
+</div>
+<button class="bg-primary-container text-on-primary-container font-label-md text-label-md px-xl py-sm rounded-full active:scale-95 transition-transform duration-200">
+                            Track Order
+                        </button>
+</div>
+</div>
+</div>
+<!-- Order Item 2: Ready -->
+<div class="group bg-surface-container-lowest rounded-[32px] p-md md:p-xl shadow-[0px_10px_30px_rgba(74,69,67,0.05)] border border-transparent hover:border-primary-container transition-all duration-300">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-md">
+<div class="flex items-start gap-md">
+<div class="relative w-20 h-20 md:w-24 md:h-24 bg-tertiary-fixed rounded-2xl overflow-hidden flex-shrink-0">
+<img alt="Matcha Latte" class="w-full h-full object-cover" data-alt="A beautiful Matcha Latte with a vibrant green hue, served in a glass cup with perfectly defined layers of matcha and creamy milk. The drink is garnished with a sprinkle of matcha powder. The scene is bright and airy with a soft focus on a light-colored wooden table. The photography style is modern and minimalist, highlighting the clean and refreshing qualities of the beverage in a high-end lifestyle context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaAY-K3WGFI5kEywDXZPE3FxQ8b0gvbf1lZonpe2GiTtn_uwRa3F9qtLdLw3vPPohB2nkPDZQAbAoCFWn7lLFqxbAk7ynnfw0m3zJfUIInhLAO__6GLyldo1MGwteQwwFYaOs2ZZmPfo1UAuR4nHqSCVox6PfcXlt00FySdNn9xfNVXHPTcSp24htxGn5HuDRPZPBujIOTj7FXU4JAXGHWCYqOMdEy2S5gEkXxEQI3fQDBkMxtsLdBzWVh7FnL3HwHzLbMInD9L471"/>
+</div>
+<div class="space-y-xs">
+<div class="flex items-center gap-sm">
+<span class="bg-primary-container text-on-primary-container px-sm py-xs rounded-full font-label-sm text-label-sm flex items-center gap-xs">
+                                    Ready for Pickup
+                                </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Order #9275</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Ceremonial Matcha Latte</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Double Toppings, Standard Sugar</p>
+<p class="font-label-md text-label-md text-secondary pt-xs">At Counter 2</p>
+</div>
+</div>
+<div class="flex lg:flex-col items-center lg:items-end justify-between gap-sm">
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-on-surface">$7.25</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">1 item</p>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-xl py-sm rounded-full active:scale-95 transition-transform duration-200">
+                            Show QR
+                        </button>
+</div>
+</div>
+</div>
+<!-- Order Item 3: History -->
+<div class="group bg-surface-container-lowest rounded-[32px] p-md md:p-xl shadow-[0px_10px_30px_rgba(74,69,67,0.05)] border border-transparent hover:border-primary-container transition-all duration-300 opacity-80">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-md">
+<div class="flex items-start gap-md">
+<div class="relative w-20 h-20 md:w-24 md:h-24 bg-tertiary-fixed rounded-2xl overflow-hidden flex-shrink-0 grayscale">
+<img alt="Taro Milk Tea" class="w-full h-full object-cover" data-alt="A soft purple Taro Milk Tea presented in a glass, with a swirl of milk and a cluster of boba at the bottom. The drink has a whimsical, pastel purple color that matches a soft aesthetic. The background features clean white surfaces and subtle shadows, maintaining a minimalist and modern cafe feel. The lighting is bright but gentle, creating a sense of refreshing delight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIqhuuSl-pOcCzn8qCOG0Kshxc8oxeXsgwCGsaB_ieeuaLR22RSnOsv1usBwsQUtT5VsRbaAmTIvb4xYrmHQghIc8RUUfQ7_D-jgOcWpRejXSesZeaMkl4w7fbwp28LLE8NhZIYpyajT8em997TXM0gDBT17ciU_utNdYWdcrvgQj4dysZ74MFyhX7f-2FQj6kX-sWYJn443PHNZzpjMNA_-KQ7LBrcxY-eWpULhZttRlc9SaDEdd7E5rxT7cY2c9QMT0sYAESx_oO"/>
+</div>
+<div class="space-y-xs">
+<div class="flex items-center gap-sm">
+<span class="bg-surface-variant text-on-surface-variant px-sm py-xs rounded-full font-label-sm text-label-sm">
+                                    Completed
+                                </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Oct 12, 2023</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Classic Taro Cream</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Large, Extra Boba</p>
+</div>
+</div>
+<div class="flex lg:flex-col items-center lg:items-end justify-between gap-sm">
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-on-surface">$6.50</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">1 item</p>
+</div>
+<button class="border-2 border-secondary text-secondary font-label-md text-label-md px-xl py-sm rounded-full active:scale-95 transition-transform duration-200 hover:bg-secondary/5">
+                            Reorder
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State (Hidden by default, for demo logic) -->
+<div class="hidden flex-col items-center justify-center py-xl text-center" id="empty-state">
+<div class="w-32 h-32 bg-primary-container/20 rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-primary text-[48px]" data-icon="receipt_long">receipt_long</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">No orders yet</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs mb-lg">Your delicious tea journey starts here.</p>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-xl py-md rounded-full">
+                Order Now
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface dark:bg-surface-container-low shadow-[0px_-4px_20px_rgba(74,69,67,0.05)] md:hidden">
+<div class="flex justify-around items-center h-20 pb-safe px-sm">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-secondary-container/20 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-secondary-container/20 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="local_cafe">local_cafe</span>
+<span class="font-label-sm text-label-sm">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-full px-4 py-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-label-sm text-label-sm">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-secondary-container/20 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+<span class="font-label-sm text-label-sm">Cart</span>
+</a>
+</div>
+</nav>
+<!-- FAB for quick help (Semantic suppression handled by not being a main action here) -->
+<button class="hidden lg:flex fixed bottom-8 right-8 bg-primary text-on-primary w-14 h-14 rounded-full items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+</button>
+<script>
+        // Micro-interaction for reorder buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+    </script>
+</body></html>

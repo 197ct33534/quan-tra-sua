@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout | Boba Bliss</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ebddff",
+                    "on-tertiary": "#38265a",
+                    "secondary-fixed": "#eaddff",
+                    "secondary-fixed-dim": "#cdc1e5",
+                    "secondary-container": "#4e4463",
+                    "on-primary": "#390094",
+                    "on-error": "#690005",
+                    "on-surface-variant": "#cbc3d5",
+                    "surface-container-high": "#2d2739",
+                    "on-tertiary-fixed-variant": "#4f3d72",
+                    "inverse-surface": "#e9def6",
+                    "error": "#ffb4ab",
+                    "secondary": "#cdc1e5",
+                    "inverse-primary": "#6844c7",
+                    "inverse-on-surface": "#332e3f",
+                    "background": "#161121",
+                    "on-secondary-fixed": "#1f1732",
+                    "tertiary-container": "#9c88c2",
+                    "surface-container-low": "#1e1929",
+                    "tertiary-fixed-dim": "#d2bcfa",
+                    "primary": "#cebdff",
+                    "on-tertiary-container": "#322053",
+                    "surface-variant": "#383244",
+                    "tertiary": "#d2bcfa",
+                    "on-primary-container": "#320085",
+                    "primary-fixed": "#e8ddff",
+                    "surface-tint": "#cebdff",
+                    "surface-container": "#221d2e",
+                    "on-primary-fixed-variant": "#5028ae",
+                    "on-secondary-container": "#bfb3d7",
+                    "primary-fixed-dim": "#cebdff",
+                    "primary-container": "#9d7bff",
+                    "on-primary-fixed": "#21005e",
+                    "surface-container-lowest": "#100b1b",
+                    "outline-variant": "#494553",
+                    "error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#4b4260",
+                    "on-surface": "#e9def6",
+                    "surface-bright": "#3c3648",
+                    "surface": "#161121",
+                    "outline": "#948e9f",
+                    "on-tertiary-fixed": "#231043",
+                    "on-secondary": "#342c49",
+                    "surface-dim": "#161121",
+                    "surface-container-highest": "#383244",
+                    "on-error-container": "#ffdad6",
+                    "on-background": "#e9def6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "sm": "8px",
+                    "margin-desktop": "64px",
+                    "md": "16px",
+                    "xl": "40px",
+                    "gutter": "24px",
+                    "base": "4px",
+                    "xs": "4px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "title-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "label-md": ["Be Vietnam Pro"],
+                    "label-sm": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #161121;
+            color: #e9def6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-panel {
+            background: rgba(34, 29, 46, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(206, 189, 255, 0.1);
+        }
+        .glow-shadow {
+            box-shadow: 0 4px 30px rgba(157, 123, 255, 0.15);
+        }
+        .active-ring {
+            box-shadow: 0 0 0 2px #cebdff, 0 0 15px rgba(206, 189, 255, 0.4);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 w-full z-50 bg-background/70 dark:bg-background/70 backdrop-blur-md border-b border-outline-variant/10 shadow-[0_4px_20px_rgba(157,123,255,0.15)]">
+<div class="flex justify-between items-center px-margin-desktop py-md max-w-full">
+<div class="flex items-center gap-xl">
+<span class="font-display-lg text-display-lg font-bold text-primary dark:text-primary tracking-tight">Boba Bliss</span>
+<nav class="hidden md:flex items-center gap-lg">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-title-md text-title-md" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-title-md text-title-md" href="#">Menu</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-title-md text-title-md" href="#">Orders</a>
+<a class="text-primary dark:text-primary border-b-2 border-primary pb-1 font-title-md text-title-md" href="#">Cart</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-2 hover:bg-surface-variant/50 dark:hover:bg-surface-variant/50 rounded-full transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined text-primary">shopping_cart</span>
+</button>
+<button class="p-2 hover:bg-surface-variant/50 dark:hover:bg-surface-variant/50 rounded-full transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-xl px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xl">Checkout</h1>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl relative">
+<!-- Left Column: Information & Payment -->
+<div class="lg:col-span-8 space-y-lg">
+<!-- Shipping Section -->
+<section class="glass-panel rounded-xl p-lg glow-shadow">
+<div class="flex items-center gap-md mb-lg">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container">local_shipping</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface">Shipping Information</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-outline">Full Name</label>
+<input class="bg-surface-container-low border border-outline-variant/30 rounded-lg p-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all" placeholder="Alex Rivers" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-outline">Phone Number</label>
+<input class="bg-surface-container-low border border-outline-variant/30 rounded-lg p-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all" placeholder="+1 (555) 000-0000" type="tel"/>
+</div>
+<div class="md:col-span-2 flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-outline">Delivery Address</label>
+<input class="bg-surface-container-low border border-outline-variant/30 rounded-lg p-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all" placeholder="123 Velvet Moon Street, Suite 404" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-outline">City</label>
+<input class="bg-surface-container-low border border-outline-variant/30 rounded-lg p-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all" placeholder="San Francisco" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-outline">Postal Code</label>
+<input class="bg-surface-container-low border border-outline-variant/30 rounded-lg p-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all" placeholder="94103" type="text"/>
+</div>
+</div>
+</section>
+<!-- Payment Method Section -->
+<section class="glass-panel rounded-xl p-lg glow-shadow">
+<div class="flex items-center gap-md mb-lg">
+<div class="w-10 h-10 rounded-full bg-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-container">payments</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface">Payment Method</h2>
+</div>
+<div class="space-y-md">
+<!-- Digital Wallets -->
+<div class="grid grid-cols-2 gap-md">
+<button class="flex items-center justify-center gap-sm bg-surface-container-low border border-primary/20 p-md rounded-lg hover:bg-surface-variant/30 transition-all active-ring group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-weight="fill">token</span>
+<span class="font-label-md text-label-md text-on-surface">Digital Wallet</span>
+</button>
+<button class="flex items-center justify-center gap-sm bg-surface-container-low border border-outline-variant/30 p-md rounded-lg hover:bg-surface-variant/30 transition-all group">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">account_balance_wallet</span>
+<span class="font-label-md text-label-md text-on-surface-variant group-hover:text-on-surface transition-colors">Express Pay</span>
+</button>
+</div>
+<!-- Credit Card Form -->
+<div class="bg-surface-container-lowest/50 rounded-lg p-lg border border-outline-variant/10">
+<div class="flex flex-col gap-lg">
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-outline">Card Number</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border border-outline-variant/30 rounded-lg p-md pr-12 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all" placeholder="XXXX XXXX XXXX XXXX" type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline">credit_card</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-lg">
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-outline">Expiry Date</label>
+<input class="bg-surface-container-low border border-outline-variant/30 rounded-lg p-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all" placeholder="MM/YY" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-outline">CVV</label>
+<input class="bg-surface-container-low border border-outline-variant/30 rounded-lg p-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all" placeholder="123" type="text"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Order Summary (Fixed behavior on scroll handled by sticky) -->
+<div class="lg:col-span-4">
+<aside class="sticky top-32 glass-panel rounded-xl p-lg glow-shadow border-primary/20">
+<h2 class="font-title-md text-title-md text-on-surface mb-lg">Order Summary</h2>
+<!-- Cart Items -->
+<div class="space-y-md mb-xl max-h-64 overflow-y-auto pr-2 custom-scrollbar">
+<div class="flex justify-between items-center gap-md">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 rounded-lg bg-surface-variant overflow-hidden shrink-0">
+<img alt="Boba tea" class="w-full h-full object-cover" data-alt="A close-up photograph of a vibrant lavender-hued boba tea with dark tapioca pearls at the bottom, topped with a creamy milk foam swirl. The setting is a minimalist midnight-themed aesthetic cafe with soft purple neon lighting reflecting on a dark marble countertop. The overall mood is luxurious, modern, and soothingly nocturnal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH-PXoX7N0ZdYXCFagpagxPo523jGmUGIZJC7-lExi_D2FRZR_dJkEbrtoPY630OXdUnoO-zfPU2yDchSDGHyP_CqiqFsPTr6Td1n60M970W-rkzsymoPWDg-XG-G6obOWcRn4iHLxmt7CpNblmZVMMEx8AB7K5aON74vpPxRPg4DTr1xlN_KzC83tznGrB6Esn6fnB8mPlCrGQk0HggU_7NldhtDxMvdTreElCt50YMlDa6IMC64mIiA9nyRn2uZvMYvcr4alYHS9"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Midnight Taro Dream</p>
+<p class="font-label-sm text-label-sm text-outline">Large • 50% Sugar • Ice</p>
+</div>
+</div>
+<span class="font-title-md text-title-md text-primary">$7.50</span>
+</div>
+<div class="flex justify-between items-center gap-md">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 rounded-lg bg-surface-variant overflow-hidden shrink-0">
+<img alt="Matcha boba" class="w-full h-full object-cover" data-alt="An artistic presentation of a Matcha Green Tea boba drink with layers of deep emerald matcha and creamy white milk. The cup is sitting on a sleek, dark reflective surface amidst a atmospheric nocturnal setting with subtle lavender glows. Professional studio lighting highlights the texture of the tapioca pearls and the condensation on the glass." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJJKGUZmaojTi4opV1by4jeiFbv6sVDYwFBbjK8rAJrBgMZBcLQMBfGalcQTvdhNQXHvCCpZ_trBvRS58cT8l7_2kx4-LQlgvGQu00c1XNYgV3V35NjMuG99ug6QuTg8fRkUmuEIW0zt3Zv-b4Mj5_yxYTV6yxFzMJrLxt28DUW8VbgNjoQmirA1E3CaF2_Zh1IE3tjiysjdSgPjwQ8u9CvaLWr1uUflNgv0W02XeFBfwBTgTsqnZ73MX5nNgkL-G5F-tZXsZUUoIr"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Cosmic Matcha Glow</p>
+<p class="font-label-sm text-label-sm text-outline">Medium • No Sugar</p>
+</div>
+</div>
+<span class="font-title-md text-title-md text-primary">$6.50</span>
+</div>
+</div>
+<!-- Breakdown -->
+<div class="space-y-sm border-t border-outline-variant/20 pt-lg mb-lg">
+<div class="flex justify-between text-on-surface-variant">
+<span class="font-body-md text-body-md">Subtotal</span>
+<span class="font-body-md text-body-md">$14.00</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="font-body-md text-body-md">Delivery Fee</span>
+<span class="font-body-md text-body-md">$2.99</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="font-body-md text-body-md">Service Tax</span>
+<span class="font-body-md text-body-md">$1.25</span>
+</div>
+<div class="flex justify-between text-on-surface pt-md">
+<span class="font-title-md text-title-md font-bold">Total</span>
+<span class="font-title-md text-title-md font-bold text-primary">$18.24</span>
+</div>
+</div>
+<button class="w-full bg-primary py-lg rounded-xl text-on-primary font-headline-lg-mobile text-headline-lg-mobile font-bold hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(206,189,255,0.4)]">
+                        Place Order
+                    </button>
+<p class="text-center mt-md font-label-sm text-label-sm text-outline">By placing order, you agree to our Terms.</p>
+</aside>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/10 w-full mt-24">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-lg px-margin-desktop py-xl">
+<div class="md:col-span-1">
+<span class="font-headline-lg text-headline-lg text-primary dark:text-primary">Boba Bliss</span>
+<p class="mt-md text-on-surface-variant font-body-md text-body-md">Steeped in Magic. Crafted for the Dreamers.</p>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="text-on-surface font-title-md text-title-md mb-xs">Explore</h4>
+<a class="text-on-surface-variant hover:text-primary underline decoration-primary/30 transition-all font-body-md text-body-md" href="#">Menu</a>
+<a class="text-on-surface-variant hover:text-primary underline decoration-primary/30 transition-all font-body-md text-body-md" href="#">Store Locator</a>
+<a class="text-on-surface-variant hover:text-primary underline decoration-primary/30 transition-all font-body-md text-body-md" href="#">Rewards</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="text-on-surface font-title-md text-title-md mb-xs">Company</h4>
+<a class="text-on-surface-variant hover:text-primary underline decoration-primary/30 transition-all font-body-md text-body-md" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary underline decoration-primary/30 transition-all font-body-md text-body-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary underline decoration-primary/30 transition-all font-body-md text-body-md" href="#">Shipping Info</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="text-on-surface font-title-md text-title-md mb-xs">Support</h4>
+<a class="text-on-surface-variant hover:text-primary underline decoration-primary/30 transition-all font-body-md text-body-md" href="#">Contact Us</a>
+<a class="text-on-surface-variant hover:text-primary underline decoration-primary/30 transition-all font-body-md text-body-md" href="#">FAQ</a>
+</div>
+</div>
+<div class="px-margin-desktop pb-xl flex flex-col md:flex-row justify-between items-center opacity-60">
+<p class="text-tertiary font-body-md text-body-md">© 2024 Boba Bliss. Steeped in Magic.</p>
+<div class="flex gap-md mt-md md:mt-0">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">public</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">share</span>
+</div>
+</div>
+</footer>
+<style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(206, 189, 255, 0.05);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(206, 189, 255, 0.3);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(206, 189, 255, 0.5);
+        }
+    </style>
+<script>
+        // Simple micro-interaction for payment method selection
+        document.querySelectorAll('button[class*="group"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active ring from all siblings
+                btn.parentElement.querySelectorAll('button').forEach(b => {
+                    b.classList.remove('active-ring', 'border-primary/20');
+                    b.classList.add('border-outline-variant/30');
+                    const icon = b.querySelector('.material-symbols-outlined');
+                    if(icon) {
+                        icon.classList.replace('text-primary', 'text-outline');
+                        icon.style.fontVariationSettings = "'FILL' 0";
+                    }
+                });
+                // Add to clicked
+                btn.classList.add('active-ring', 'border-primary/20');
+                btn.classList.remove('border-outline-variant/30');
+                const icon = btn.querySelector('.material-symbols-outlined');
+                if(icon) {
+                    icon.classList.replace('text-outline', 'text-primary');
+                    icon.style.fontVariationSettings = "'FILL' 1";
+                }
+            });
+        });
+
+        // Interactive "Place Order" button loading state simulation
+        const placeOrderBtn = document.querySelector('button.bg-primary');
+        placeOrderBtn.addEventListener('click', () => {
+            const originalText = placeOrderBtn.innerText;
+            placeOrderBtn.innerText = 'Processing...';
+            placeOrderBtn.classList.add('opacity-80', 'cursor-wait');
+            setTimeout(() => {
+                placeOrderBtn.innerText = 'Order Confirmed! ✨';
+                placeOrderBtn.classList.remove('bg-primary');
+                placeOrderBtn.classList.add('bg-tertiary-container', 'text-on-tertiary-container');
+                setTimeout(() => {
+                    placeOrderBtn.innerText = originalText;
+                    placeOrderBtn.classList.add('bg-primary');
+                    placeOrderBtn.classList.remove('bg-tertiary-container', 'text-on-tertiary-container', 'opacity-80', 'cursor-wait');
+                }, 3000);
+            }, 2000);
+        });
+    </script>
+</body></html>

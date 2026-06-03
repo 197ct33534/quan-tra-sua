@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Boba Bliss - Refreshing Delight</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container-highest": "#383244",
+                "error": "#ffb4ab",
+                "primary-fixed": "#e8ddff",
+                "error-container": "#93000a",
+                "outline-variant": "#494553",
+                "inverse-surface": "#e9def6",
+                "on-background": "#e9def6",
+                "on-secondary": "#342c49",
+                "primary-container": "#9d7bff",
+                "secondary": "#cdc1e5",
+                "surface-variant": "#383244",
+                "primary": "#cebdff",
+                "on-primary": "#390094",
+                "tertiary": "#d2bcfa",
+                "on-tertiary-container": "#322053",
+                "secondary-fixed": "#eaddff",
+                "inverse-on-surface": "#332e3f",
+                "on-primary-container": "#320085",
+                "secondary-container": "#4e4463",
+                "on-primary-fixed-variant": "#5028ae",
+                "surface-tint": "#cebdff",
+                "surface": "#161121",
+                "primary-fixed-dim": "#cebdff",
+                "on-tertiary": "#38265a",
+                "tertiary-container": "#9c88c2",
+                "on-primary-fixed": "#21005e",
+                "on-tertiary-fixed-variant": "#4f3d72",
+                "surface-bright": "#3c3648",
+                "tertiary-fixed": "#ebddff",
+                "secondary-fixed-dim": "#cdc1e5",
+                "surface-container-low": "#1e1929",
+                "on-surface-variant": "#cbc3d5",
+                "surface-container-high": "#2d2739",
+                "on-error-container": "#ffdad6",
+                "surface-container": "#221d2e",
+                "surface-dim": "#161121",
+                "surface-container-lowest": "#100b1b",
+                "inverse-primary": "#6844c7",
+                "on-tertiary-fixed": "#231043",
+                "on-surface": "#e9def6",
+                "on-secondary-fixed": "#1f1732",
+                "background": "#161121",
+                "on-error": "#690005",
+                "on-secondary-fixed-variant": "#4b4260",
+                "tertiary-fixed-dim": "#d2bcfa",
+                "outline": "#948e9f",
+                "on-secondary-container": "#bfb3d7"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "xl": "40px",
+                "gutter": "24px",
+                "sm": "8px",
+                "xs": "4px",
+                "margin-desktop": "64px",
+                "margin-mobile": "16px",
+                "md": "16px",
+                "base": "4px",
+                "lg": "24px"
+            },
+            "fontFamily": {
+                "headline-lg-mobile": ["Plus Jakarta Sans"],
+                "body-lg": ["Be Vietnam Pro"],
+                "display-lg": ["Plus Jakarta Sans"],
+                "body-md": ["Be Vietnam Pro"],
+                "headline-lg": ["Plus Jakarta Sans"],
+                "label-sm": ["Be Vietnam Pro"],
+                "title-md": ["Plus Jakarta Sans"],
+                "label-md": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #161121;
+            color: #e9def6;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(56, 50, 68, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(232, 221, 255, 0.1);
+        }
+        .boba-loader span {
+            animation: boba-bounce 0.6s infinite alternate;
+        }
+        .boba-loader span:nth-child(2) { animation-delay: 0.2s; }
+        .boba-loader span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes boba-bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-8px); }
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top App Bar - Using Shared Component Pattern -->
+<header class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_20px_rgba(157,123,255,0.15)] h-16 flex justify-between items-center px-margin-mobile">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Beverly Hills, CA</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim">Boba Bliss</h1>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container/30 active:scale-95 transition-transform duration-200 cursor-pointer">
+<img alt="User profile photo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsWVX865nMYvO3eNLU-qQj3Lkc6q4uCgPHK2DCp_36Fwn75OhiRm6-UWyTa-46zH8Bm8ur-BIWdYuP-TZciAhIP0PEDdDHVfr1-f0EDE_WprkujOuSY8KDw-Og7zIgB1CBIVBjDLzD18_84GhJFgx6jiJpwJHEWoj8j44AZmR3T7sRkxCGxXaKYj_mMmKB5WDd6hHVwUmwjr5LDlrFUyVSDJeKpq6-E7SnOtuzUc5NMIpkyG9lFAYyJV0jk0Pn7KZWJJKXnB5sS7hu"/>
+</div>
+</header>
+<main class="max-w-md mx-auto pt-20 pb-32">
+<!-- Greeting & Hero -->
+<section class="px-margin-mobile mt-base">
+<div class="py-sm">
+<p class="font-body-lg text-body-lg text-on-surface-variant">Hello, Tea Lover!</p>
+<h2 class="font-display-lg text-[32px] leading-tight text-primary mt-xs">Find your perfect sip.</h2>
+</div>
+<!-- Search Bar -->
+<div class="mt-md relative transition-transform duration-300">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+</div>
+<input class="w-full h-14 pl-12 pr-12 rounded-xl border-none bg-surface-container-highest text-on-surface shadow-[0px_10px_30px_rgba(0,0,0,0.3)] focus:ring-2 focus:ring-primary-container transition-all placeholder:text-outline-variant font-body-md" placeholder="Search your favorite boba..." type="text"/>
+<button class="absolute right-3 top-2 w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+</button>
+</div>
+</section>
+<!-- Categories -->
+<section class="mt-lg">
+<div class="flex items-center justify-between px-margin-mobile mb-md">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Categories</h3>
+<button class="font-label-md text-label-md text-primary hover:opacity-80 transition-opacity">View All</button>
+</div>
+<div class="flex overflow-x-auto gap-3 px-margin-mobile no-scrollbar">
+<!-- Category Item Active -->
+<button class="flex-shrink-0 flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-on-primary shadow-[0_4px_15px_rgba(157,123,255,0.4)] active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="local_cafe">local_cafe</span>
+<span class="font-label-md">Classic</span>
+</button>
+<!-- Category Item -->
+<button class="flex-shrink-0 flex items-center gap-2 px-6 py-3 rounded-full bg-surface-container-high text-on-surface-variant border border-white/5 hover:bg-surface-container-highest active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="eco">eco</span>
+<span class="font-label-md">Fruit Tea</span>
+</button>
+<!-- Category Item -->
+<button class="flex-shrink-0 flex items-center gap-2 px-6 py-3 rounded-full bg-surface-container-high text-on-surface-variant border border-white/5 hover:bg-surface-container-highest active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="cookie">cookie</span>
+<span class="font-label-md">Brown Sugar</span>
+</button>
+</div>
+</section>
+<!-- Popular Now Grid -->
+<section class="mt-lg px-margin-mobile">
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Popular Now</h3>
+<div class="flex gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Drink Card 1 -->
+<div class="glass-card rounded-xl p-3 group cursor-pointer active:scale-[0.98] transition-transform">
+<div class="relative w-full aspect-square rounded-lg overflow-hidden bg-surface-container-lowest">
+<img alt="Classic Brown Sugar Milk Tea" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0iZeoLmEKBN19ZiYfIH686ljKee9URjdAVNd1CycDu1Y1kRmsbuHNfDKUFJ3NhgDgLpSVn5q5l4n36i28Cn7J0EHeJZKIdGFFj_qOiVg_ppoKZtsns989hmAqcTsojO7oCkYAsUhBhcF-hsJXKkfsctCETAnVAsn20A4IR9gbAVA-VdatlDfM7tJCO04rZuwmigxTs2LCYLEL0j6ARkd3h-I91PqR87lrVNayp090XAWDYmlnOBDRRZGYqf_Mve7QeRO8CW_VOWye"/>
+<div class="absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container/60 backdrop-blur-md flex items-center justify-center text-primary active:scale-90">
+<span class="material-symbols-outlined text-[18px]" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<div class="mt-3">
+<h4 class="font-label-md text-on-surface truncate">Brown Sugar Deerioca</h4>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-outline">4.9</span>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="font-title-md text-primary">$6.50</span>
+<button class="w-9 h-9 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container hover:bg-secondary transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Drink Card 2 -->
+<div class="glass-card rounded-xl p-3 group cursor-pointer active:scale-[0.98] transition-transform">
+<div class="relative w-full aspect-square rounded-lg overflow-hidden bg-surface-container-lowest">
+<img alt="Strawberry Fruit Tea" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCAhsIC-9fWjlZcCQ8ly7zgbmG0ggG-vkYBvuBq30nJESTDnxpXpVTmaVQnIcqttqsqy9DleCOwGJ9NEv-EQZTB8b7qk6KU5oUTCbl37tOvRGPw_weBam645bHY_O10U5JPE4nAEJAqHuzK5QZJR-jSyZiOEuPYpBFnITu9HUfZY1oXxEGCrdWs5JEL0Zi_TzCwjlblTfzjqQnYLiJmF3fnXkNw77QkLiV760w-8Bo0Hy4WSUAHIqwrcSXfWyQesh1U9zuttJMKSGS"/>
+<div class="absolute top-2 right-2 w-8 h-8 rounded-full bg-surface-container/60 backdrop-blur-md flex items-center justify-center text-outline active:scale-90">
+<span class="material-symbols-outlined text-[18px]" data-icon="favorite">favorite</span>
+</div>
+</div>
+<div class="mt-3">
+<h4 class="font-label-md text-on-surface truncate">Strawberry Bliss</h4>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-outline">4.7</span>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="font-title-md text-primary">$5.75</span>
+<button class="w-9 h-9 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container hover:bg-secondary transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Seasonal Promo Banner -->
+<section class="mt-xl px-margin-mobile">
+<div class="relative w-full h-40 rounded-xl overflow-hidden shadow-2xl bg-surface-container-highest border border-white/5">
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-highest via-surface-container-highest/80 to-transparent z-10 p-6 flex flex-col justify-center">
+<span class="font-label-sm text-on-primary-fixed bg-primary/20 backdrop-blur-md border border-primary/30 px-3 py-1 rounded-full w-fit">Limited Time</span>
+<h3 class="font-headline-lg text-primary mt-2">Peach Oolong Blast</h3>
+<p class="font-body-md text-on-surface-variant">Get 20% off your first seasonal drink!</p>
+</div>
+<img alt="Promo Banner" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4LWtFAif_gBCqnfyOmu9Zgv3GoWFjyNdO6Ta8hYj_NxEIbhfrHO16Yy2yjrh20rhRsOLuhC5eVd_Y7ewr8SsdccN4gzBsXmWwY8Qu9iOUc2yraU2eaQEFvBJqhfRvNPTjzasZPF0oY2ovs_0ONBD05-2IGIYie3SjLUyLye0QrYfEB8pZwhQ-mSdntXz5Sj0ug48Iyi3Gd_1EEi7txtPguHrOZjvVjYfezuzKbU9MXgwtyny5x2LkD7j8J4s4giZS5ujQ7-Tlqk00"/>
+</div>
+</section>
+</main>
+<!-- Bottom Nav Bar - Using Shared Component Pattern -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container/80 backdrop-blur-lg border-t border-white/5 shadow-[0_-4px_20px_rgba(157,123,255,0.1)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-primary-container/40 text-primary dark:text-primary-fixed rounded-full px-4 py-1 transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant/70 hover:bg-white/5 transition-colors transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="local_cafe">local_cafe</span>
+<span class="font-label-sm">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant/70 hover:bg-white/5 transition-colors transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-sm">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant/70 hover:bg-white/5 transition-colors transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
+<span class="font-label-sm">Cart</span>
+</a>
+</nav>
+<!-- FAB -->
+<button class="fixed right-6 bottom-24 w-16 h-16 rounded-full bg-primary text-on-primary shadow-[0_8px_30px_rgba(157,123,255,0.4)] flex items-center justify-center active:scale-90 transition-transform z-40 group overflow-hidden">
+<div class="boba-loader flex items-center justify-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary"></span>
+</div>
+</button>
+<script>
+    // Focus effect for search bar container
+    const searchInput = document.querySelector('input');
+    searchInput.addEventListener('focus', () => {
+        searchInput.parentElement.classList.add('scale-[1.02]');
+    });
+    searchInput.addEventListener('blur', () => {
+        searchInput.parentElement.classList.remove('scale-[1.02]');
+    });
+
+    // Category selection logic
+    const chips = document.querySelectorAll('.flex-shrink-0');
+    chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            chips.forEach(c => {
+                c.classList.remove('bg-primary', 'text-on-primary', 'shadow-[0_4px_15px_rgba(157,123,255,0.4)]');
+                c.classList.add('bg-surface-container-high', 'text-on-surface-variant', 'border', 'border-white/5');
+            });
+            chip.classList.remove('bg-surface-container-high', 'text-on-surface-variant', 'border', 'border-white/5');
+            chip.classList.add('bg-primary', 'text-on-primary', 'shadow-[0_4px_15px_rgba(157,123,255,0.4)]');
+        });
+    });
+</script>
+</body></html>

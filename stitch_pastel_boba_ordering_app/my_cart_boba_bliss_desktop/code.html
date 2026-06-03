@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cart | Boba Bliss</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#837377",
+                    "outline-variant": "#d5c2c6",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#fff8f6",
+                    "on-tertiary-fixed": "#1e1b16",
+                    "on-primary-fixed": "#360b1e",
+                    "surface-container-highest": "#e9e1de",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#864d61",
+                    "on-primary-container": "#7b4458",
+                    "on-tertiary-container": "#59554e",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#a1d0c1",
+                    "primary-fixed-dim": "#fab3ca",
+                    "on-background": "#1e1b19",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#e8e2d8",
+                    "tertiary": "#625e56",
+                    "surface": "#fff8f6",
+                    "secondary": "#3a675a",
+                    "primary-container": "#ffb7ce",
+                    "inverse-primary": "#fab3ca",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#214e43",
+                    "primary-fixed": "#ffd9e3",
+                    "on-secondary-container": "#406d60",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#bceddc",
+                    "tertiary-container": "#d0cac1",
+                    "on-tertiary-fixed-variant": "#4a463f",
+                    "primary": "#864d61",
+                    "on-surface": "#1e1b19",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#514347",
+                    "inverse-on-surface": "#f8efec",
+                    "surface-container-high": "#efe6e3",
+                    "on-primary-fixed-variant": "#6a364a",
+                    "background": "#fff8f6",
+                    "on-secondary-fixed": "#002019",
+                    "inverse-surface": "#342f2e",
+                    "tertiary-fixed-dim": "#ccc6bc",
+                    "surface-container": "#f5ece9",
+                    "secondary-fixed": "#bceddc",
+                    "surface-container-low": "#fbf2ef",
+                    "surface-dim": "#e1d8d5",
+                    "surface-variant": "#e9e1de"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "auto",
+                    "xs": "4px",
+                    "margin-mobile": "20px",
+                    "xl": "64px",
+                    "base": "8px",
+                    "gutter": "16px",
+                    "lg": "40px",
+                    "sm": "12px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fff8f6; /* Tertiary Cream from Design System */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .boba-loader span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #864d61;
+            margin: 0 2px;
+            animation: boba-bounce 0.6s infinite alternate;
+        }
+        .boba-loader span:nth-child(2) { animation-delay: 0.2s; }
+        .boba-loader span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes boba-bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-8px); }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d5c2c6;
+            border-radius: 10px;
+        }
+        .item-card:active {
+            transform: scale(0.98);
+            transition: transform 0.15s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface sticky top-0 z-50 shadow-[0px_10px_30px_rgba(74,69,67,0.05)] w-full">
+<nav class="flex justify-between items-center h-20 px-lg max-w-[1200px] mx-auto w-full">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold text-primary">Boba Bliss</span>
+</div>
+<div class="hidden md:flex items-center gap-xl">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Menu</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Orders</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-bold font-body-md text-body-md" href="#">Cart</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Profile</a>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-2 text-primary hover:bg-primary-container/20 rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="p-2 text-primary hover:bg-primary-container/20 rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</nav>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow max-w-[1200px] mx-auto w-full px-lg py-xl">
+<div class="mb-lg">
+<h1 class="font-headline-xl text-headline-xl text-on-surface">Your Bliss Basket</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Review your refreshing selections before we start brewing.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl items-start">
+<!-- Left Column: Cart Items -->
+<div class="lg:col-span-8 space-y-md">
+<!-- Cart Item 1 -->
+<div class="item-card bg-surface-container-lowest p-md rounded-xl flex gap-md shadow-[0px_10px_30px_rgba(74,69,67,0.05)] transition-all">
+<div class="w-32 h-32 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Classic Milk Tea" class="w-full h-full object-cover" data-alt="A professional studio photograph of a tall glass of classic brown sugar pearl milk tea. The drink features rich caramel swirls of brown sugar syrup against creamy milk, topped with a layer of dark, glossy tapioca pearls at the bottom. The lighting is soft and airy, emphasizing a clean, minimalist aesthetic with pastel pink and cream accents in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCShqQazzFr9f400BvUgvVh-xXXy75RWfOje5CYSzRsqIbtIQbFuwo0zPYZruuRVqOLZtRxU5-uIxo4I9Y6DyvF2Et1jHLeg2Jhm8OC75h4Gwz0YkKSXEtQXrCAoDY50XrrNeHDT8m3GQX5Mb8JANtcni4zYMKYWQy5-RY_6LjSq20nMlZT7yLu11pHxsA--zoirlDOHK46HOj-VMtfCnewfvWUJF199HS0PbRYNTH7GgFLPh_XuyAREFDDvvBJtTSI3P4gNiETwWAs"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface">Classic Brown Sugar Bliss</h3>
+<span class="font-headline-md text-headline-md text-primary">$6.50</span>
+</div>
+<div class="flex flex-wrap gap-xs mt-sm">
+<span class="px-sm py-1 bg-tertiary-container text-on-tertiary-container rounded-full text-label-sm font-label-sm">Large</span>
+<span class="px-sm py-1 bg-tertiary-container text-on-tertiary-container rounded-full text-label-sm font-label-sm">50% Sugar</span>
+<span class="px-sm py-1 bg-tertiary-container text-on-tertiary-container rounded-full text-label-sm font-label-sm">Less Ice</span>
+<span class="px-sm py-1 bg-primary-container text-on-primary-container rounded-full text-label-sm font-label-sm">+ Extra Boba</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-md">
+<div class="flex items-center bg-surface-container rounded-full px-xs py-xs border border-outline-variant/30">
+<button class="w-8 h-8 flex items-center justify-center text-primary hover:bg-white rounded-full transition-all">-</button>
+<span class="px-md font-body-md text-body-md">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-primary hover:bg-white rounded-full transition-all">+</button>
+</div>
+<button class="text-on-surface-variant hover:text-error flex items-center gap-xs transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+<span class="text-label-md font-label-md">Remove</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Cart Item 2 -->
+<div class="item-card bg-surface-container-lowest p-md rounded-xl flex gap-md shadow-[0px_10px_30px_rgba(74,69,67,0.05)] transition-all">
+<div class="w-32 h-32 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Matcha Cloud" class="w-full h-full object-cover" data-alt="A beautifully layered matcha latte with a thick cream cap served in a modern glass cup. The vibrant green matcha at the bottom transitions into a soft white milk layer, topped with a fluffy cheese foam. The scene is set on a light wooden table in a sun-drenched, minimalist cafe with soft pastel mint green decor elements." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuFrrVSSlWWOWg-3onKyn29rUwTOfFf-6flZ4D4L84eZkRFJmqQAV-lYjOD1rTeKsWxg8HlwUT9l0zCbVTORT6X1V8ll196pxZe53TCc_1ejxNKfdNGAySmTOpYzbDKdvWy2SJ7Wbvh9gfaCcF2bOfHV881bLibLvHHVmd1Af4GlYUp1pUo6-TMcQiW9kxy3l0K2oAA5QW_UYXc6LEeDjpoZKIknCO16kIksERWqE4eKtcHg6Pi7qA6zQqE1U9_VRXWO0rPQledgiX"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface">Matcha Cream Cloud</h3>
+<span class="font-headline-md text-headline-md text-primary">$7.25</span>
+</div>
+<div class="flex flex-wrap gap-xs mt-sm">
+<span class="px-sm py-1 bg-tertiary-container text-on-tertiary-container rounded-full text-label-sm font-label-sm">Regular</span>
+<span class="px-sm py-1 bg-tertiary-container text-on-tertiary-container rounded-full text-label-sm font-label-sm">30% Sugar</span>
+<span class="px-sm py-1 bg-primary-container text-on-primary-container rounded-full text-label-sm font-label-sm">+ Cheese Foam</span>
+</div>
+</div>
+<div class="flex justify-between items-center mt-md">
+<div class="flex items-center bg-surface-container rounded-full px-xs py-xs border border-outline-variant/30">
+<button class="w-8 h-8 flex items-center justify-center text-primary hover:bg-white rounded-full transition-all">-</button>
+<span class="px-md font-body-md text-body-md">2</span>
+<button class="w-8 h-8 flex items-center justify-center text-primary hover:bg-white rounded-full transition-all">+</button>
+</div>
+<button class="text-on-surface-variant hover:text-error flex items-center gap-xs transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span>
+<span class="text-label-md font-label-md">Remove</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Empty State Suggestion -->
+<div class="mt-xl pt-lg border-t border-outline-variant/20">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-md">Want to add a little more?</h4>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-md">
+<div class="bg-surface-container-low p-sm rounded-xl border border-transparent hover:border-primary-container transition-all cursor-pointer group">
+<div class="aspect-square rounded-lg bg-surface-variant mb-sm overflow-hidden">
+<img alt="Lychee Jelly" class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="A close-up artistic shot of translucent, pink lychee jelly cubes glistening in a white porcelain bowl. The lighting is bright and summery, with soft shadows. The overall aesthetic is clean and refreshing, emphasizing the smooth texture of the dessert against a soft pink background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrudLLvOUB349Zi1a99lkiHBYyiuBxsgP8Cj9XqxnbwjPt76n0XyZZzbTz7jj_UKE5VaICkveuiSWxF2ltS0BxczvYfTRTE51Dn0daYxTepL8E8rhAypi4NQNJ-SWEVk_OVEwWv0M5sytRUUbRpIK5QIptc1GU-5qxrezRhlvLodseRtNVKp8fpjO3WrRByVa2DzfIEJkbyjPb7z56z6Yer5RwVWxipl0wlbeF3tKVFL_pko1-4RdfNqRUAK7efeUO_4317ewe4PUi"/>
+</div>
+<p class="font-label-md text-label-md text-on-surface mb-xs">Lychee Fruit Tea</p>
+<p class="text-primary font-bold">$5.50</p>
+</div>
+<div class="bg-surface-container-low p-sm rounded-xl border border-transparent hover:border-primary-container transition-all cursor-pointer group">
+<div class="aspect-square rounded-lg bg-surface-variant mb-sm overflow-hidden">
+<img alt="Taro Milk" class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="A minimalist presentation of a lavender-colored taro milk tea in a clear glass. The drink has a creamy, opaque purple hue and is surrounded by fresh lavender sprigs and raw taro chunks. The style is high-end boutique cafe, with bright, soft light and a gentle pastel palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABSJRvHE1cT5RcvQ6X8xB42cjwY05cuy8oaCOL42YMb-atz4S_IE9s3NhNVW-PTpKeGKRa_uIOnDn1bjOKYdxBSdnUZnq0WYf2xB4BRG0UtfE0kUk0lyoRXVARxe4HzGvz2CtiLluBeusm3UK_iLL_fNQzaYZpFA88CLfJq6XJy-sf_Sb0EO0AP6knXfkiCzvwT_QLm342Vl_Xu6LtpaN-aud3u8XLX4Ul3IeQE1lrXHNMlPF1hZHi_CrmZxmyyE8tvAvbtPpAXHlj"/>
+</div>
+<p class="font-label-md text-label-md text-on-surface mb-xs">Taro Velvet Bliss</p>
+<p class="text-primary font-bold">$6.75</p>
+</div>
+<div class="hidden md:block bg-surface-container-low p-sm rounded-xl border border-transparent hover:border-primary-container transition-all cursor-pointer group">
+<div class="aspect-square rounded-lg bg-surface-variant mb-sm overflow-hidden">
+<img alt="Thai Tea" class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="A striking glass of Thai iced tea with its characteristic deep orange color at the bottom, swirling into a creamy white coconut milk layer at the top. The glass is sweat-beaded with condensation, suggesting coolness. The lighting is soft and golden, set against a minimalist white and peach backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI-_NDAy8DkLRKlJ0Xm4Ed5KZ4RF7bKuEUpaEiBHoJW6XffORHxpLHgvpPQl80MXuZfOCEa2X02YyANIvsghkvJYTpa7O8X-F1BX4No0K2pYtrJJrrst5EyZWnHQnsnZv43X3soyiw8NmnQjVkJHcSV8IUjYxWlyittWjEP1ylJ3_F2zyL83ved5Z4sgBg5ofVNVeUd9vBdz_BDbHfFML9KHWigTLdsgrO0-jiBgZdwV4v86OyGIqaXj8r1hwuC9gozV9NR3s6k4pu"/>
+</div>
+<p class="font-label-md text-label-md text-on-surface mb-xs">Royal Thai Bliss</p>
+<p class="text-primary font-bold">$6.25</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Order Summary -->
+<aside class="lg:col-span-4 sticky top-28">
+<div class="bg-surface-container-high p-md rounded-xl shadow-[0px_10px_30px_rgba(74,69,67,0.05)]">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md">Order Summary</h2>
+<div class="space-y-sm">
+<div class="flex justify-between items-center text-on-surface-variant font-body-md text-body-md">
+<span>Subtotal (3 items)</span>
+<span>$21.00</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant font-body-md text-body-md">
+<span>Tax (8%)</span>
+<span>$1.68</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant font-body-md text-body-md">
+<span>Delivery Fee</span>
+<span class="text-secondary font-bold">FREE</span>
+</div>
+<div class="pt-sm border-t border-outline-variant/30 flex justify-between items-center mt-md">
+<span class="font-headline-md text-headline-md text-on-surface">Total</span>
+<span class="font-headline-md text-headline-md text-primary">$22.68</span>
+</div>
+</div>
+<!-- Promo Code -->
+<div class="mt-lg">
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-xs">PROMO CODE</label>
+<div class="flex gap-xs">
+<input class="flex-grow bg-white border-none rounded-lg px-md py-sm text-body-md focus:ring-2 focus:ring-primary-container" placeholder="BLISS2024" type="text"/>
+<button class="bg-secondary-container text-on-secondary-container px-md py-sm rounded-lg font-label-md transition-all active:scale-95">Apply</button>
+</div>
+</div>
+<!-- Checkout Button -->
+<button class="w-full mt-lg bg-primary text-white py-md rounded-xl font-headline-md text-headline-md shadow-sm hover:shadow-md transition-all active:scale-95 flex items-center justify-center gap-sm" onclick="handleCheckout()">
+<span>Place Order</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Safe Checkout Badge -->
+<div class="mt-md flex items-center justify-center gap-xs text-on-surface-variant opacity-60">
+<span class="material-symbols-outlined text-[16px]" data-icon="lock">lock</span>
+<span class="text-label-sm font-label-sm">Secure Checkout Powered by BlissPay</span>
+</div>
+</div>
+<!-- Delivery Address Preview -->
+<div class="mt-md bg-surface-container-low p-md rounded-xl border border-outline-variant/20">
+<div class="flex justify-between items-center mb-sm">
+<h3 class="font-label-md text-label-md text-on-surface">Delivery To</h3>
+<button class="text-primary font-label-sm underline">Edit</button>
+</div>
+<div class="flex gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+<div class="text-on-surface-variant font-body-md text-body-md">
+<p>123 Aesthetic Lane, Apt 4B</p>
+<p>Minimalist City, MC 90210</p>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-surface-container-high w-full mt-lg border-t border-outline-variant/10">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md px-lg py-xl max-w-[1200px] mx-auto">
+<div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary block mb-md">Boba Bliss</span>
+<p class="text-on-surface-variant font-body-md text-body-md">Sip into a world of refreshing delight. Our hand-crafted teas are made with love and the finest ingredients.</p>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-secondary mb-md">Company</h4>
+<ul class="space-y-sm text-on-surface-variant font-label-md">
+<li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Sustainability</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-secondary mb-md">Support</h4>
+<ul class="space-y-sm text-on-surface-variant font-label-md">
+<li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">FAQ</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-secondary mb-md">Stay Sweet</h4>
+<p class="text-on-surface-variant font-label-md mb-sm">Get exclusive offers in your inbox.</p>
+<div class="flex gap-xs">
+<input class="bg-surface border-none rounded-lg px-sm py-xs text-sm w-full focus:ring-1 focus:ring-primary" placeholder="Email" type="email"/>
+<button class="bg-primary text-on-primary px-sm py-xs rounded-lg text-sm">Join</button>
+</div>
+</div>
+</div>
+<div class="max-w-[1200px] mx-auto px-lg py-md border-t border-outline-variant/10 flex justify-between items-center">
+<p class="text-on-surface-variant font-label-md text-label-md">© 2024 Boba Bliss. All rights reserved.</p>
+<div class="flex gap-md">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary" data-icon="public">public</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary" data-icon="share">share</span>
+</div>
+</div>
+</footer>
+<!-- Custom Checkout Overlay (Mock) -->
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] flex items-center justify-center hidden opacity-0 transition-opacity duration-300" id="checkout-overlay">
+<div class="bg-white rounded-3xl p-xl max-w-md w-full text-center shadow-2xl transform scale-95 transition-transform duration-300" id="checkout-modal">
+<div class="boba-loader mb-lg">
+<span></span>
+<span></span>
+<span></span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-md">Brewing Your Happiness...</h2>
+<p class="text-on-surface-variant font-body-md text-body-md mb-lg">Please wait while we process your order with our tea masters.</p>
+</div>
+</div>
+<script>
+        function handleCheckout() {
+            const overlay = document.getElementById('checkout-overlay');
+            const modal = document.getElementById('checkout-modal');
+            
+            overlay.classList.remove('hidden');
+            setTimeout(() => {
+                overlay.classList.add('opacity-100');
+                modal.classList.remove('scale-95');
+                modal.classList.add('scale-100');
+            }, 10);
+
+            // Mock success state after 2.5 seconds
+            setTimeout(() => {
+                modal.innerHTML = `
+                    <div class="w-20 h-20 bg-secondary-container text-secondary mx-auto rounded-full flex items-center justify-center mb-lg">
+                        <span class="material-symbols-outlined text-4xl" data-icon="check_circle">check_circle</span>
+                    </div>
+                    <h2 class="font-headline-lg text-headline-lg text-on-surface mb-md">Order Confirmed!</h2>
+                    <p class="text-on-surface-variant font-body-md text-body-md mb-lg">Your bliss is on its way. Expect your order in 20-30 minutes.</p>
+                    <button onclick="location.reload()" class="w-full bg-primary text-white py-md rounded-xl font-headline-md text-headline-md">Track My Boba</button>
+                `;
+            }, 2500);
+        }
+    </script>
+</body></html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | Boba Bliss</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>.glass-panel {
+    background: rgba(34, 29, 46, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(206, 189, 255, 0.1)
+    }
+.glow-shadow {
+    box-shadow: 0 0 40px rgba(157, 123, 255, 0.15)
+    }
+.input-glow:focus-within {
+    box-shadow: 0 0 15px rgba(157, 123, 255, 0.3);
+    border-color: rgba(206, 189, 255, 0.5)
+    }
+body {
+    background-color: #161121
+    }
+.boba-bg {
+    background-image: linear-gradient(to bottom, rgba(22, 17, 33, 0.8), rgba(22, 17, 33, 0.95)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuBszupmqH1NM2_cFcT6VNA6roIcjh_inG5nk5xfn_jibpCfnCOiyvt790dVFUoZIg9GAMtEfyX3P2lvkUlKxe5JFp9R-ww_za_CUwtScf2ID6osppZp3EUsmnLxVQb1ksA_vVzjeaF6-Q3jH_ZbnkEghckYfVK_KyNFblUgpx2UkeZPNovRyEeVQ78bEC1vUIBLCiCFQ2cWc_8irnQ5QTn9kWRDZO4M5kKAqWyIu8AL3ES-RgL0Ojoq5gy46YP--MWG0wjbIrScX9I0);
+    background-size: cover;
+    background-position: center
+    }</style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ebddff",
+                        "on-tertiary": "#38265a",
+                        "secondary-fixed": "#eaddff",
+                        "secondary-fixed-dim": "#cdc1e5",
+                        "secondary-container": "#4e4463",
+                        "on-primary": "#390094",
+                        "on-error": "#690005",
+                        "on-surface-variant": "#cbc3d5",
+                        "surface-container-high": "#2d2739",
+                        "on-tertiary-fixed-variant": "#4f3d72",
+                        "inverse-surface": "#e9def6",
+                        "error": "#ffb4ab",
+                        "secondary": "#cdc1e5",
+                        "inverse-primary": "#6844c7",
+                        "inverse-on-surface": "#332e3f",
+                        "background": "#161121",
+                        "on-secondary-fixed": "#1f1732",
+                        "tertiary-container": "#9c88c2",
+                        "surface-container-low": "#1e1929",
+                        "tertiary-fixed-dim": "#d2bcfa",
+                        "primary": "#cebdff",
+                        "on-tertiary-container": "#322053",
+                        "surface-variant": "#383244",
+                        "tertiary": "#d2bcfa",
+                        "on-primary-container": "#320085",
+                        "primary-fixed": "#e8ddff",
+                        "surface-tint": "#cebdff",
+                        "surface-container": "#221d2e",
+                        "on-primary-fixed-variant": "#5028ae",
+                        "on-secondary-container": "#bfb3d7",
+                        "primary-fixed-dim": "#cebdff",
+                        "primary-container": "#9d7bff",
+                        "on-primary-fixed": "#21005e",
+                        "surface-container-lowest": "#100b1b",
+                        "outline-variant": "#494553",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#4b4260",
+                        "on-surface": "#e9def6",
+                        "surface-bright": "#3c3648",
+                        "surface": "#161121",
+                        "outline": "#948e9f",
+                        "on-tertiary-fixed": "#231043",
+                        "on-secondary": "#342c49",
+                        "surface-dim": "#161121",
+                        "surface-container-highest": "#383244",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#e9def6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "sm": "8px",
+                        "margin-desktop": "64px",
+                        "md": "16px",
+                        "xl": "40px",
+                        "gutter": "24px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-md": ["Be Vietnam Pro"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container">
+<!-- Hero Background Wrapper -->
+<div class="fixed inset-0 z-0 boba-bg" data-alt="A cinematic, out-of-focus close-up of a premium taro boba tea with dark tapioca pearls settling at the bottom of a glass. The scene is bathed in a nocturnal lavender glow with soft bokeh lights in the background creating an atmosphere of mysterious comfort. The overall aesthetic is clean, modern, and high-end, utilizing a deep purple and violet color palette to evoke a sense of late-night luxury and calm.">
+</div>
+<!-- Main Content Canvas -->
+<main class="relative z-10 flex-grow flex items-center justify-center px-margin-mobile md:px-margin-desktop py-xl">
+<!-- Auth Container -->
+<div class="w-full max-w-[440px] glass-panel glow-shadow rounded-xl overflow-hidden transition-all duration-500 animate-in fade-in zoom-in slide-in-from-bottom-4">
+<div class="p-lg md:p-xl space-y-lg">
+<!-- Brand Header -->
+<div class="text-center space-y-xs">
+<h1 class="font-display-lg text-display-lg text-primary tracking-tight">Boba Bliss</h1>
+<p class="font-body-md text-on-surface-variant">Welcome back to the midnight garden.</p>
+</div>
+<!-- Login Form -->
+<form class="space-y-md" onsubmit="event.preventDefault();">
+<div class="space-y-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant block ml-xs">Email Address</label>
+<div class="input-glow flex items-center bg-surface-container rounded-lg border border-outline-variant/30 transition-all duration-200">
+<span class="material-symbols-outlined ml-md text-outline" style="font-size: 20px;">mail</span>
+<input class="w-full bg-transparent border-none focus:ring-0 py-md px-md text-on-surface placeholder:text-outline/50 font-body-md" placeholder="name@example.com" type="email"/>
+</div>
+</div>
+<div class="space-y-base">
+<div class="flex justify-between items-center px-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant block">Password</label>
+<a class="font-label-sm text-label-sm text-primary hover:underline transition-all" href="#">Forgot?</a>
+</div>
+<div class="input-glow flex items-center bg-surface-container rounded-lg border border-outline-variant/30 transition-all duration-200">
+<span class="material-symbols-outlined ml-md text-outline" style="font-size: 20px;">lock</span>
+<input class="w-full bg-transparent border-none focus:ring-0 py-md px-md text-on-surface placeholder:text-outline/50 font-body-md" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-title-md text-title-md py-md rounded-lg shadow-lg hover:scale-[1.01] active:scale-95 transition-all duration-200 mt-lg">
+                        Login
+                    </button>
+</form>
+<!-- Divider -->
+<div class="relative py-md">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant/20"></div>
+</div>
+<div class="relative flex justify-center text-xs uppercase">
+<span class="bg-surface-container-high px-md text-outline text-[10px] font-bold tracking-widest rounded-full">Or continue with</span>
+</div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-md">
+<button class="flex items-center justify-center gap-sm bg-surface-container-high border border-outline-variant/30 hover:bg-surface-variant py-md rounded-lg transition-all duration-200 active:scale-95">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-4.53z" fill="#EA4335"></path>
+</svg>
+<span class="font-label-md text-label-md">Google</span>
+</button>
+<button class="flex items-center justify-center gap-sm bg-surface-container-high border border-outline-variant/30 hover:bg-surface-variant py-md rounded-lg transition-all duration-200 active:scale-95">
+<svg class="w-5 h-5 text-on-surface" fill="currentColor" viewbox="0 0 24 24">
+<path d="M17.05 20.28c-.96.95-2.12 1.62-3.48 2-1.3.36-2.5.25-3.62-.33a6.76 6.76 0 01-2.58-2.31c-2.45-3.73-2.12-9.43 1.05-12.22 1.55-1.37 3.6-2.03 5.48-1.61.91.2 1.74.65 2.44 1.34 1.15-.65 2.57-.86 3.84-.57-1.34 2.22-1.22 5.16.42 7.15.53.64 1.18 1.17 1.9 1.56a12.13 12.13 0 01-1.3 2.92c-.65 1-1.47 2.24-2.15 2.07zm-2.1-15.35c.1-.8.03-1.63-.2-2.4a5.05 5.05 0 00-3.32-3.48c.1 2.24 1.41 4.14 3.52 5.88z"></path>
+</svg>
+<span class="font-label-md text-label-md">Apple</span>
+</button>
+</div>
+<!-- Footer Text -->
+<p class="text-center font-label-md text-label-md text-on-surface-variant">
+                    Don't have an account? 
+                    <a class="text-primary hover:underline transition-all" href="#">Sign Up</a>
+</p>
+</div>
+<!-- Accent Glow -->
+<div class="h-1 bg-gradient-to-r from-transparent via-primary-container to-transparent opacity-50"></div>
+</div>
+</main>
+<!-- Footer Meta -->
+<footer class="relative z-10 w-full py-md text-center">
+<p class="font-label-sm text-label-sm text-outline/60 tracking-wider">
+            © 2024 BOBA BLISS. STEEPED IN MAGIC.
+        </p>
+</footer>
+<!-- Micro-interaction Scripts -->
+<script>
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('scale-[1.02]');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('scale-[1.02]');
+            });
+        });
+
+        // Simple parallax effect for background
+        document.addEventListener('mousemove', (e) => {
+            const bg = document.querySelector('.boba-bg');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            bg.style.transform = `translate(${x * 10}px, ${y * 10}px) scale(1.05)`;
+        });
+    </script>
+</body></html>

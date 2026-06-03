@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Boba Bliss - Checkout</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .boba-loader span {
+            animation: boba-bounce 0.6s infinite alternate;
+        }
+        .boba-loader span:nth-child(2) { animation-delay: 0.2s; }
+        .boba-loader span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes boba-bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-8px); }
+        }
+        .soft-press:active {
+            transform: scale(0.98);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d5c2c6; border-radius: 10px; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#a1d0c1",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#ffb7ce",
+                        "surface-bright": "#fff8f6",
+                        "on-tertiary-container": "#59554e",
+                        "surface-tint": "#864d61",
+                        "tertiary": "#625e56",
+                        "tertiary-fixed": "#e8e2d8",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#d0cac1",
+                        "secondary-fixed": "#bceddc",
+                        "secondary-container": "#bceddc",
+                        "surface-container-highest": "#e9e1de",
+                        "on-secondary-fixed-variant": "#214e43",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#3a675a",
+                        "primary-fixed-dim": "#fab3ca",
+                        "on-tertiary-fixed-variant": "#4a463f",
+                        "on-secondary-fixed": "#002019",
+                        "surface-container": "#f5ece9",
+                        "outline": "#837377",
+                        "inverse-surface": "#342f2e",
+                        "surface-dim": "#e1d8d5",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#fbf2ef",
+                        "surface": "#fff8f6",
+                        "on-primary-container": "#7b4458",
+                        "outline-variant": "#d5c2c6",
+                        "on-primary-fixed": "#360b1e",
+                        "primary-fixed": "#ffd9e3",
+                        "background": "#fff8f6",
+                        "primary": "#864d61",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#fab3ca",
+                        "inverse-on-surface": "#f8efec",
+                        "surface-variant": "#e9e1de",
+                        "surface-container-high": "#efe6e3",
+                        "on-surface-variant": "#514347",
+                        "on-primary-fixed-variant": "#6a364a",
+                        "tertiary-fixed-dim": "#ccc6bc",
+                        "on-tertiary-fixed": "#1e1b16",
+                        "on-background": "#1e1b19",
+                        "on-secondary-container": "#406d60",
+                        "on-surface": "#1e1b19"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem", /* Oversized organic corners per brand */
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "lg": "40px",
+                        "margin-mobile": "20px",
+                        "base": "8px",
+                        "margin-desktop": "auto",
+                        "gutter": "16px",
+                        "md": "24px",
+                        "xl": "64px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface sticky top-0 z-50 shadow-[0px_10px_30px_rgba(74,69,67,0.05)] h-16 w-full flex justify-between items-center px-margin-mobile md:px-lg">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container transition-colors soft-press">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile md:text-headline-md text-primary">Boba Bliss</h1>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A clean, professional headshot of a smiling young person against a soft, pastel-colored studio background. The lighting is bright and high-key, matching a minimalist and modern lifestyle aesthetic. The photo is tightly cropped, emphasizing a friendly and approachable user persona for a boutique beverage app interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ7oC2NJ4AcV-dCIyVMUod2v-ZwPdeF044Rn-T8k6tHoybeUUy3v-wObRv9gJD0eaw-qKTc5NwUISoWnUFaudHZ_Qa5WT8o_2vsz7bOJqm4ILXQINepnj7APMmnLdD5nx8FKVVTseZVGPzjQsAskE8OUm5Zg313EG-lL6QxLb2khFO-GuUqgZEuN-g4g-XfrBnYTpehLaR7uFDcT5XJahkLrGsYclPbLne-63bqOhkwCAsnDj0VPHNsSnOBWI2wc7LJVfTw-6gh-SX"/>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-margin-mobile md:px-lg py-base md:py-md mb-32">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
+<!-- Left Column: Order Items & Delivery Selection -->
+<div class="lg:col-span-8 space-y-lg">
+<!-- Section Title -->
+<div>
+<h2 class="font-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Review Order</h2>
+<p class="font-body-md text-on-surface-variant">Check your pearls and sweetness levels before checkout.</p>
+</div>
+<!-- Order Summary Cards (Asymmetric Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0px_10px_30px_rgba(74,69,67,0.05)] flex gap-md transition-all hover:scale-[1.02]">
+<div class="w-24 h-24 rounded-lg bg-surface-container overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A beautiful close-up of a Taro Milk Tea with purple marble swirls and dark boba pearls at the bottom. The drink is in a minimalist clear glass with a soft pink background. High-key natural lighting highlights the creamy texture and the vibrant lilac hue of the tea, reflecting a high-end boutique cafe style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAhjLm5sHWs_DTHvuuf_whK_VmVLgb4fegEStcotrNucN7tCi2Yx-pAMnVUpcImhzq1ZtzTECTREmsiypJ9YLHsYPkt10tFFI615uO7wPBHEBoFxLuyVDriAkDIw5ffqxYSbu9IUgQBvYx7PhDHra__qMFW57Io7Nr7Z5zRpapFudWqIGq6JiHOBcXSE5bDH9jY4DeVXrOKyKfB-T01AnLMYiiuB7dqEIDG629KiRIXRoFKuwv-LU6IVTm0eeJCaoYgC8Rh2KSucPK"/>
+</div>
+<div class="flex flex-col justify-between flex-grow">
+<div>
+<h3 class="font-label-md text-on-surface">Taro Milk Tea</h3>
+<p class="text-[12px] text-on-surface-variant font-medium">50% Sugar • Less Ice • Large</p>
+</div>
+<div class="flex justify-between items-end">
+<span class="font-headline-md text-primary text-[20px]">$6.50</span>
+<div class="flex items-center gap-base bg-surface-container-low px-2 py-1 rounded-full">
+<button class="material-symbols-outlined text-primary text-[18px] soft-press">remove</button>
+<span class="font-label-md text-on-surface">1</span>
+<button class="material-symbols-outlined text-primary text-[18px] soft-press">add</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-[0px_10px_30px_rgba(74,69,67,0.05)] flex gap-md transition-all hover:scale-[1.02]">
+<div class="w-24 h-24 rounded-lg bg-surface-container overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A refreshing Passion Fruit Green Tea with fresh fruit slices and mint leaves in a crystal clear tall glass. The liquid is a vibrant golden-yellow with visible seeds. Soft, diffused lighting creates an airy and refreshing mood. The background is a clean mint-green, maintaining the soft minimalism of the design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9H2NT1CohkDZgzr8t4Ql_RAcF_dSBtwyfEct8zUwG56CqRQBmuNi73yWZ_0akkhZ2XBjvCQEqVJ-zNePO78YWSjysW3oJSteoj1fpc-bq59-4_SLUBGleUn9pTvDwqQVVoHoZ6KHEn1c9k019nXkXg3j-ZIkrurJ_5yxnsmcBAz8ec1f9sKEBCuWh-0va9rZz8FVjimy2NjmdQj8Bmu5RVHwWE8j96rEwGrUSFwNtKYEILlMLLFz5w_wXTg57eAIuFq4_BSdozswh"/>
+</div>
+<div class="flex flex-col justify-between flex-grow">
+<div>
+<h3 class="font-label-md text-on-surface">Passion Fruit Green Tea</h3>
+<p class="text-[12px] text-on-surface-variant font-medium">No Sugar • Normal Ice • Regular</p>
+</div>
+<div class="flex justify-between items-end">
+<span class="font-headline-md text-primary text-[20px]">$5.75</span>
+<div class="flex items-center gap-base bg-surface-container-low px-2 py-1 rounded-full">
+<button class="material-symbols-outlined text-primary text-[18px] soft-press">remove</button>
+<span class="font-label-md text-on-surface">1</span>
+<button class="material-symbols-outlined text-primary text-[18px] soft-press">add</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Fulfillment Method -->
+<div class="bg-surface-container-low p-md rounded-xl space-y-md">
+<h3 class="font-label-md text-on-surface flex items-center gap-xs">
+<span class="material-symbols-outlined text-secondary">person_filled</span>
+                        Delivery or Pickup
+                    </h3>
+<div class="flex gap-gutter">
+<label class="flex-1 cursor-pointer">
+<input checked="" class="hidden peer" name="delivery_method" type="radio"/>
+<div class="flex flex-col items-center justify-center p-md bg-surface-container-lowest rounded-xl border-2 border-transparent peer-checked:border-primary peer-checked:bg-primary-container/10 transition-all soft-press">
+<span class="material-symbols-outlined text-primary mb-1">delivery_dining</span>
+<span class="font-label-sm text-on-surface">Delivery</span>
+</div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input class="hidden peer" name="delivery_method" type="radio"/>
+<div class="flex flex-col items-center justify-center p-md bg-surface-container-lowest rounded-xl border-2 border-transparent peer-checked:border-primary peer-checked:bg-primary-container/10 transition-all soft-press">
+<span class="material-symbols-outlined text-secondary mb-1">storefront</span>
+<span class="font-label-sm text-on-surface">Pickup</span>
+</div>
+</label>
+</div>
+<!-- Location Input (Glassmorphism inspired) -->
+<div class="relative mt-md">
+<div class="absolute inset-y-0 left-4 flex items-center">
+<span class="material-symbols-outlined text-outline text-[20px]">location_on</span>
+</div>
+<input class="w-full bg-surface-container-lowest border-none rounded-xl py-4 pl-12 pr-4 shadow-sm focus:ring-2 focus:ring-primary/20 font-body-md text-on-surface" placeholder="Enter your delivery address" type="text" value="123 Pastel Lane, Sugar City"/>
+</div>
+</div>
+</div>
+<!-- Right Column: Summary & Payment (Sticky on Desktop) -->
+<div class="lg:col-span-4 lg:sticky lg:top-24">
+<div class="bg-white p-md md:p-xl rounded-xl shadow-[0px_10px_30px_rgba(74,69,67,0.05)] space-y-md">
+<h3 class="font-headline-md text-on-surface border-b border-surface-variant pb-md">Payment Summary</h3>
+<div class="space-y-sm">
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Subtotal</span>
+<span>$12.25</span>
+</div>
+<div class="flex justify-between font-body-md text-on-secondary-container">
+<span>Delivery Fee</span>
+<span>$2.50</span>
+</div>
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Tax (8%)</span>
+<span>$0.98</span>
+</div>
+<div class="pt-md mt-md border-t border-surface-variant flex justify-between items-center">
+<span class="font-headline-md text-on-surface">Total</span>
+<span class="font-headline-md text-primary">$15.73</span>
+</div>
+</div>
+<!-- Payment Method Chip Selection -->
+<div class="pt-md">
+<p class="font-label-sm text-outline mb-base uppercase tracking-wider">Payment Method</p>
+<div class="flex flex-wrap gap-xs">
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-label-sm flex items-center gap-xs soft-press">
+<span class="material-symbols-outlined text-[18px]" data-weight="fill">credit_card</span>
+                                Card ending in 4242
+                            </button>
+<button class="bg-surface-container text-on-surface-variant px-4 py-2 rounded-full font-label-sm hover:bg-surface-container-highest transition-colors soft-press">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+                                Add
+                            </button>
+</div>
+</div>
+<!-- Place Order Button -->
+<button class="w-full bg-primary-container hover:opacity-90 text-on-primary-container py-4 rounded-xl font-headline-md text-[20px] shadow-sm transition-all flex items-center justify-center gap-md soft-press mt-md">
+                        Place Order
+                        <span class="material-symbols-outlined">chevron_right</span>
+</button>
+<!-- Safe Shopping Note -->
+<p class="text-[12px] text-outline text-center">
+<span class="material-symbols-outlined text-[14px] align-middle mr-1">verified_user</span>
+                        Secure payment powered by BobaPay
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl bg-surface shadow-[0px_-4px_20px_rgba(74,69,67,0.05)] flex justify-around items-center h-20 pb-safe px-sm">
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">local_cafe</span>
+<span class="font-label-sm text-label-sm">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-sm text-label-sm">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_basket</span>
+<span class="font-label-sm text-label-sm">Cart</span>
+</a>
+</nav>
+<!-- Micro-interaction: Boba Loader (Invisible by default, triggered by action) -->
+<div class="fixed inset-0 bg-white/80 backdrop-blur-md z-[100] flex items-center justify-center hidden" id="loading-overlay">
+<div class="text-center">
+<div class="boba-loader flex gap-2 justify-center mb-md">
+<span class="w-4 h-4 bg-primary rounded-full"></span>
+<span class="w-4 h-4 bg-primary rounded-full"></span>
+<span class="w-4 h-4 bg-primary rounded-full"></span>
+</div>
+<p class="font-headline-md text-primary">Prepping your order...</p>
+</div>
+</div>
+<script>
+        // Micro-interaction for the "Place Order" button
+        document.querySelector('button.bg-primary-container').addEventListener('click', function() {
+            const loader = document.getElementById('loading-overlay');
+            loader.classList.remove('hidden');
+            
+            // Simulating a successful order redirect after 2 seconds
+            setTimeout(() => {
+                loader.innerHTML = `
+                    <div class="text-center animate-bounce">
+                        <span class="material-symbols-outlined text-[64px] text-secondary mb-md">check_circle</span>
+                        <h2 class="font-headline-xl text-on-surface">Order Placed!</h2>
+                        <p class="font-body-lg text-on-surface-variant">Your tea will be ready in 15 mins.</p>
+                        <button onclick="window.location.reload()" class="mt-xl bg-secondary-container text-on-secondary-container px-lg py-md rounded-full font-label-md">Back to Home</button>
+                    </div>
+                `;
+            }, 2000);
+        });
+
+        // Simple item counter logic
+        document.querySelectorAll('.flex.items-center.gap-base.bg-surface-container-low').forEach(counter => {
+            const minus = counter.querySelector('.material-symbols-outlined:first-child');
+            const plus = counter.querySelector('.material-symbols-outlined:last-child');
+            const countSpan = counter.querySelector('.font-label-md');
+
+            plus.addEventListener('click', () => {
+                let count = parseInt(countSpan.innerText);
+                countSpan.innerText = count + 1;
+            });
+
+            minus.addEventListener('click', () => {
+                let count = parseInt(countSpan.innerText);
+                if(count > 1) countSpan.innerText = count - 1;
+            });
+        });
+    </script>
+</body></html>

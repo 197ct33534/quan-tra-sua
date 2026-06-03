@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Boba Bliss - Refreshing Menu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#383244",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#e8ddff",
+                        "error-container": "#93000a",
+                        "outline-variant": "#494553",
+                        "inverse-surface": "#e9def6",
+                        "on-background": "#e9def6",
+                        "on-secondary": "#342c49",
+                        "primary-container": "#9d7bff",
+                        "secondary": "#cdc1e5",
+                        "surface-variant": "#383244",
+                        "primary": "#cebdff",
+                        "on-primary": "#390094",
+                        "tertiary": "#d2bcfa",
+                        "on-tertiary-container": "#322053",
+                        "secondary-fixed": "#eaddff",
+                        "inverse-on-surface": "#332e3f",
+                        "on-primary-container": "#320085",
+                        "secondary-container": "#4e4463",
+                        "on-primary-fixed-variant": "#5028ae",
+                        "surface-tint": "#cebdff",
+                        "surface": "#161121",
+                        "primary-fixed-dim": "#cebdff",
+                        "on-tertiary": "#38265a",
+                        "tertiary-container": "#9c88c2",
+                        "on-primary-fixed": "#21005e",
+                        "on-tertiary-fixed-variant": "#4f3d72",
+                        "surface-bright": "#3c3648",
+                        "tertiary-fixed": "#ebddff",
+                        "secondary-fixed-dim": "#cdc1e5",
+                        "surface-container-low": "#1e1929",
+                        "on-surface-variant": "#cbc3d5",
+                        "surface-container-high": "#2d2739",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#221d2e",
+                        "surface-dim": "#161121",
+                        "surface-container-lowest": "#100b1b",
+                        "inverse-primary": "#6844c7",
+                        "on-tertiary-fixed": "#231043",
+                        "on-surface": "#e9def6",
+                        "on-secondary-fixed": "#1f1732",
+                        "background": "#161121",
+                        "on-error": "#690005",
+                        "on-secondary-fixed-variant": "#4b4260",
+                        "tertiary-fixed-dim": "#d2bcfa",
+                        "outline": "#948e9f",
+                        "on-secondary-container": "#bfb3d7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "40px",
+                        "gutter": "24px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "16px",
+                        "md": "16px",
+                        "base": "4px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "title-md": ["Plus Jakarta Sans"],
+                        "label-md": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .boba-loader span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #cebdff;
+            margin: 0 4px;
+            animation: boba-bounce 1.4s infinite ease-in-out both;
+        }
+        .boba-loader span:nth-child(1) { animation-delay: -0.32s; }
+        .boba-loader span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes boba-bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1.0); }
+        }
+        .glass-card {
+            background: rgba(45, 39, 57, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(157, 123, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar - Predicted Component: TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_20px_rgba(157,123,255,0.15)] flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-xs hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200 cursor-pointer">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Central Park</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">Boba Bliss</h1>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200 cursor-pointer">
+<img alt="User profile photo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFj7waYxB-AaM4Q7972H3Ea9CMQ8-fe2r5ys54OQYLo7PV7-MfFMTPeOCPdxJ2TAzd6zBfIyi1HWyKkOWE2dXNtuESm_QwhDcCd12ybxQWCla092UolEsY8zlnX5dG5Tm2VN8QniVRFBEbtgNWNDlESIafxra_YbvfC1R7QBoU90pCP5FaPdM4woP0-dSfWMHnWeafV7ntexUYPyd2hMC8XN7c6iTDzXLmAhmGQC8TOgV6TWl17TF7hD04_rNxyNuxEocGP7m-_Gy6"/>
+</div>
+</header>
+<main class="max-w-[450px] mx-auto px-margin-mobile pt-20 pb-24">
+<!-- Search & Hero -->
+<section class="mt-base mb-lg">
+<div class="relative group">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full h-14 pl-12 pr-4 bg-surface-container-low/50 backdrop-blur-md rounded-xl border border-white/5 focus:ring-2 focus:ring-primary/50 text-body-md placeholder-on-surface-variant/50 transition-all outline-none" placeholder="Search your favorite drink..." type="text"/>
+</div>
+</section>
+<!-- Dynamic Category Chips -->
+<section class="mb-lg overflow-x-auto hide-scrollbar -mx-margin-mobile px-margin-mobile flex gap-sm">
+<button class="px-6 py-2 bg-primary text-on-primary rounded-full font-label-md whitespace-nowrap active:scale-95 transition-transform">All Drinks</button>
+<button class="px-6 py-2 bg-surface-container text-on-surface-variant rounded-full font-label-md whitespace-nowrap hover:bg-surface-container-highest transition-colors active:scale-95">Milk Tea</button>
+<button class="px-6 py-2 bg-surface-container text-on-surface-variant rounded-full font-label-md whitespace-nowrap hover:bg-surface-container-highest transition-colors active:scale-95">Fruit Tea</button>
+<button class="px-6 py-2 bg-surface-container text-on-surface-variant rounded-full font-label-md whitespace-nowrap hover:bg-surface-container-highest transition-colors active:scale-95">Smoothies</button>
+<button class="px-6 py-2 bg-surface-container text-on-surface-variant rounded-full font-label-md whitespace-nowrap hover:bg-surface-container-highest transition-colors active:scale-95">Matcha Series</button>
+</section>
+<!-- Quick Filters -->
+<section class="grid grid-cols-2 gap-sm mb-lg">
+<div class="p-sm glass-card rounded-xl">
+<h3 class="font-label-sm text-label-sm text-primary mb-xs uppercase">Ice Level</h3>
+<select class="w-full bg-transparent border-none p-0 font-label-md text-on-surface focus:ring-0 appearance-none">
+<option class="bg-surface">Regular Ice</option>
+<option class="bg-surface">Less Ice</option>
+<option class="bg-surface">No Ice</option>
+</select>
+</div>
+<div class="p-sm glass-card rounded-xl">
+<h3 class="font-label-sm text-label-sm text-primary mb-xs uppercase">Sweetness</h3>
+<select class="w-full bg-transparent border-none p-0 font-label-md text-on-surface focus:ring-0 appearance-none">
+<option class="bg-surface">100% Sugar</option>
+<option class="bg-surface">75% Sugar</option>
+<option class="bg-surface">50% Sugar</option>
+<option class="bg-surface">25% Sugar</option>
+</select>
+</div>
+</section>
+<!-- Menu List -->
+<div class="space-y-sm">
+<!-- Item 1 -->
+<div class="flex items-center glass-card p-sm rounded-xl hover:translate-y-[-2px] transition-all group">
+<div class="w-24 h-24 rounded-lg overflow-hidden bg-surface-container-highest flex-shrink-0">
+<img alt="Matcha Latte with Boba" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVs4jE47hCHTB_5KEHskjGCyr6g5nTNG2HIWqCpgtPZUJ7PwVuNkePzivCX2M74yI0wzUH8YO0eEr_8jB7FeaQFRvtZ_6mS0ov3_-IHAqxzZUDdw4BCeHu6sIfmO4wc7RviUUTWLSo-iLxAJer0MXutwZTwFZxBGprcg4KoOQ7dIZj5hgZEtyn02tpPSmVlvjK2aPTAvheH_BaSEKE-tnkbj6k30QKb6x_7l6RGHTtgjLXB3vJ_FK1gx8WhApfKmjrW4l6Q3SpKfnR"/>
+</div>
+<div class="ml-md flex-grow">
+<h2 class="font-title-md text-title-md text-on-surface">Matcha Latte</h2>
+<p class="font-label-sm text-on-surface-variant">Premium Uji matcha &amp; house milk</p>
+<div class="flex items-center justify-between mt-xs">
+<span class="font-title-md text-primary">$6.50</span>
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-transform shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center glass-card p-sm rounded-xl hover:translate-y-[-2px] transition-all group">
+<div class="w-24 h-24 rounded-lg overflow-hidden bg-surface-container-highest flex-shrink-0">
+<img alt="Classic Brown Sugar Milk" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx_BRqIcxvJ-yDG6L2z14e_LjIcAheNATX-rJZiHFsXo-qS9UVhDe7nAG-j-laoy_lKgXLMxa7sOE_GOkvYYgSUyHPeYTK_WlIpy9VjiEOaae4OZRqMuNj89Spe5C5VqDBNe2YjfHGKHlKWTUOiT-3kBVA56etz4WOAhIKXo7969rTCQHttHeSDHHc_GXOhgFRbq1anv1jaxwSdL4dVXklUk2c45LNoOrJ4Ry6mZeLuv8SCf7BXXT5zxA7zMEE8qda0XwuI4y_OKbD"/>
+</div>
+<div class="ml-md flex-grow">
+<h2 class="font-title-md text-title-md text-on-surface">Brown Sugar Milk</h2>
+<p class="font-label-sm text-on-surface-variant">Fresh milk with warm brown sugar</p>
+<div class="flex items-center justify-between mt-xs">
+<span class="font-title-md text-primary">$5.75</span>
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-transform shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center glass-card p-sm rounded-xl hover:translate-y-[-2px] transition-all group">
+<div class="w-24 h-24 rounded-lg overflow-hidden bg-surface-container-highest flex-shrink-0">
+<img alt="Strawberry Jasmine Tea" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeclEM5FgIJcVZPYyxmXaRtwlilg3-Pg5iUCfdNkyyUhqv-iKSeXHEpHtXRP7MqD4gDeYSLt7z6UbkVNo8J8Oj8L_DC5kCY8zxfKxBDyzzrhevspHnahFj18ZdJwuBLuHAXQFhIo0wNixslpIufKyGTUs32Z1M2BMEPngEtpkFQ4Wl7ynTpioNSr4Pc8toii55KkCfLZNWkVX0JxhEiJRKJFIT09qc0aA7GwB4lwOat5RlTwAMk3wrA6vp2KVd32hc7f5CmVvaAJDg"/>
+</div>
+<div class="ml-md flex-grow">
+<h2 class="font-title-md text-title-md text-on-surface">Strawberry Jasmine</h2>
+<p class="font-label-sm text-on-surface-variant">Hand-picked berries &amp; floral tea</p>
+<div class="flex items-center justify-between mt-xs">
+<span class="font-title-md text-primary">$6.25</span>
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-transform shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="flex items-center glass-card p-sm rounded-xl hover:translate-y-[-2px] transition-all group">
+<div class="w-24 h-24 rounded-lg overflow-hidden bg-surface-container-highest flex-shrink-0">
+<img alt="Taro Milk Tea" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRW6CQB-ISp3DhlE-d3_OqCDrn2x5qkrkRtSRknIavz8Bfr1SfuyuM-Aj4e2rFzOtgWFxGbEJ0RLzaHAFnyb8gT8CIgrPjhaeIW8CvRZYkwpAEGoWZ7qDB9TZUt6Yh-XwdMiVLfmQtFiErWoqO0use5ahALV_3ds3lCFwnQTYlvlKi2DMG9rOkNUlde8tmevumjiu-Lh0Jpmz0RxLlbPyxhOV6tDvntaibgasxxGmZSZ4SQkG0Btzc-CMEcK0CCSDDK4m9Rt9Bqnwu"/>
+</div>
+<div class="ml-md flex-grow">
+<h2 class="font-title-md text-title-md text-on-surface">Taro Milk Tea</h2>
+<p class="font-label-sm text-on-surface-variant">Real taro root with jasmine base</p>
+<div class="flex items-center justify-between mt-xs">
+<span class="font-title-md text-primary">$5.95</span>
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-transform shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-center items-center mt-xl mb-md">
+<div class="boba-loader">
+<span></span><span></span><span></span>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar - Predicted Component: BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container/80 backdrop-blur-lg border-t border-white/5 shadow-[0_-4px_20px_rgba(157,123,255,0.1)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/5 transition-colors active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container/40 text-primary dark:text-primary-fixed rounded-full px-4 py-1 hover:bg-white/5 transition-colors active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bubble_tea</span>
+<span class="font-label-sm text-label-sm">Menu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/5 transition-colors active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-sm text-label-sm">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/5 transition-colors active:scale-90 transition-transform duration-150" href="#">
+<div class="relative">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="absolute -top-1 -right-1 w-4 h-4 bg-primary text-on-primary text-[10px] flex items-center justify-center rounded-full">2</span>
+</div>
+<span class="font-label-sm text-label-sm">Cart</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.add('scale-90');
+                setTimeout(() => this.classList.remove('scale-90'), 150);
+            });
+        });
+
+        // Add to cart simple logic
+        let cartCount = 2;
+        const addButtons = document.querySelectorAll('button .material-symbols-outlined');
+        addButtons.forEach(icon => {
+            if(icon.textContent === 'add') {
+                icon.parentElement.addEventListener('click', () => {
+                    cartCount++;
+                    const badge = document.querySelector('.relative .bg-primary');
+                    if(badge) badge.textContent = cartCount;
+                });
+            }
+        });
+
+        // Filter chip toggle
+        const chips = document.querySelectorAll('button.whitespace-nowrap');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => {
+                    c.classList.remove('bg-primary', 'text-on-primary');
+                    c.classList.add('bg-surface-container', 'text-on-surface-variant');
+                });
+                chip.classList.remove('bg-surface-container', 'text-on-surface-variant');
+                chip.classList.add('bg-primary', 'text-on-primary');
+            });
+        });
+    </script>
+</body></html>

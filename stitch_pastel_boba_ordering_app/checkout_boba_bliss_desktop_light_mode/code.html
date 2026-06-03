@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout | Boba Bliss</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#fff8f6",
+                    "primary-fixed-dim": "#fab3ca",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#1e1b16",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed-variant": "#6a364a",
+                    "secondary-fixed": "#bceddc",
+                    "on-error": "#ffffff",
+                    "on-primary-container": "#7b4458",
+                    "surface-container-high": "#efe6e3",
+                    "primary": "#864d61",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#d5c2c6",
+                    "on-secondary-container": "#406d60",
+                    "on-secondary-fixed": "#002019",
+                    "tertiary-fixed-dim": "#ccc6bc",
+                    "tertiary-fixed": "#e8e2d8",
+                    "secondary-container": "#bceddc",
+                    "inverse-on-surface": "#f8efec",
+                    "primary-container": "#ffb7ce",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-variant": "#e9e1de",
+                    "on-background": "#1e1b19",
+                    "surface-container-highest": "#e9e1de",
+                    "on-primary-fixed": "#360b1e",
+                    "inverse-surface": "#342f2e",
+                    "on-tertiary-fixed-variant": "#4a463f",
+                    "inverse-primary": "#fab3ca",
+                    "tertiary": "#625e56",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#e1d8d5",
+                    "background": "#fff8f6",
+                    "surface-bright": "#fff8f6",
+                    "on-tertiary-container": "#59554e",
+                    "secondary": "#3a675a",
+                    "secondary-fixed-dim": "#a1d0c1",
+                    "error-container": "#ffdad6",
+                    "outline": "#837377",
+                    "primary-fixed": "#ffd9e3",
+                    "on-surface-variant": "#514347",
+                    "tertiary-container": "#d0cac1",
+                    "surface-tint": "#864d61",
+                    "on-surface": "#1e1b19",
+                    "on-secondary-fixed-variant": "#214e43",
+                    "surface-container-low": "#fbf2ef",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#f5ece9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "xl": "64px",
+                    "margin-desktop": "auto",
+                    "sm": "12px",
+                    "md": "24px",
+                    "lg": "40px",
+                    "base": "8px",
+                    "gutter": "16px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .boba-loader span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #864d61;
+            margin: 0 2px;
+            animation: boba-bounce 1.4s infinite ease-in-out both;
+        }
+        .boba-loader span:nth-child(1) { animation-delay: -0.32s; }
+        .boba-loader span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes boba-bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1.0); }
+        }
+        .soft-shadow {
+            box-shadow: 0px 10px 30px rgba(74, 69, 67, 0.05);
+        }
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #fab3ca;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-background font-body-md text-body-md antialiased">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full bg-surface shadow-[0px_10px_30px_rgba(74,69,67,0.05)] h-20">
+<div class="max-w-[1200px] mx-auto h-full px-lg flex justify-between items-center">
+<div class="font-headline-md text-headline-md font-bold text-primary">Boba Bliss</div>
+<nav class="hidden md:flex items-center space-x-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Menu</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Orders</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-bold font-body-md text-body-md" href="#">Cart</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Profile</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-primary hover:scale-95 transition-all">shopping_cart</button>
+<button class="material-symbols-outlined text-primary hover:scale-95 transition-all">account_circle</button>
+</div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-lg py-xl">
+<div class="mb-lg">
+<h1 class="font-headline-lg text-headline-lg text-on-background">Secure Checkout</h1>
+<p class="text-on-surface-variant mt-xs">Complete your boba ritual with ease.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<!-- Left Column: Shipping & Payment -->
+<div class="lg:col-span-7 space-y-lg">
+<!-- Shipping Section -->
+<section class="bg-surface-container-lowest rounded-xl p-md soft-shadow">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-secondary">local_shipping</span>
+<h2 class="font-headline-md text-headline-md">Shipping Information</h2>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">First Name</label>
+<input class="bg-surface-container border-none rounded-lg p-sm font-body-md" placeholder="Janice" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Last Name</label>
+<input class="bg-surface-container border-none rounded-lg p-sm font-body-md" placeholder="Chen" type="text"/>
+</div>
+<div class="flex flex-col gap-xs md:col-span-2">
+<label class="font-label-md text-label-md text-on-surface-variant">Street Address</label>
+<input class="bg-surface-container border-none rounded-lg p-sm font-body-md" placeholder="123 Matcha Lane" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">City</label>
+<input class="bg-surface-container border-none rounded-lg p-sm font-body-md" placeholder="Tea Garden" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Zip Code</label>
+<input class="bg-surface-container border-none rounded-lg p-sm font-body-md" placeholder="90210" type="text"/>
+</div>
+</form>
+</section>
+<!-- Payment Section -->
+<section class="bg-surface-container-lowest rounded-xl p-md soft-shadow">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-secondary">payments</span>
+<h2 class="font-headline-md text-headline-md">Payment Method</h2>
+</div>
+<div class="grid grid-cols-3 gap-sm mb-md">
+<button class="border-2 border-primary-fixed-dim bg-surface rounded-lg py-sm flex flex-col items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">credit_card</span>
+<span class="font-label-md text-label-md">Card</span>
+</button>
+<button class="border border-outline-variant bg-surface-container-low rounded-lg py-sm flex flex-col items-center justify-center gap-xs hover:border-primary-fixed-dim transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">account_balance_wallet</span>
+<span class="font-label-md text-label-md">Digital Wallet</span>
+</button>
+<button class="border border-outline-variant bg-surface-container-low rounded-lg py-sm flex flex-col items-center justify-center gap-xs hover:border-primary-fixed-dim transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">contactless</span>
+<span class="font-label-md text-label-md">Express</span>
+</button>
+</div>
+<form class="space-y-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Cardholder Name</label>
+<input class="bg-surface-container border-none rounded-lg p-sm font-body-md" placeholder="Janice Chen" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Card Number</label>
+<div class="relative">
+<input class="w-full bg-surface-container border-none rounded-lg p-sm font-body-md" placeholder="**** **** **** 4455" type="text"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 flex gap-xs">
+<span class="material-symbols-outlined text-outline-variant">credit_card</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Expiry Date</label>
+<input class="bg-surface-container border-none rounded-lg p-sm font-body-md" placeholder="MM/YY" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">CVV</label>
+<input class="bg-surface-container border-none rounded-lg p-sm font-body-md" placeholder="***" type="password"/>
+</div>
+</div>
+</form>
+</section>
+</div>
+<!-- Right Column: Order Summary -->
+<div class="lg:col-span-5">
+<aside class="bg-surface-container-low rounded-xl p-md soft-shadow sticky top-24">
+<h2 class="font-headline-md text-headline-md mb-md">Order Summary</h2>
+<!-- Item List -->
+<div class="space-y-md mb-lg">
+<div class="flex items-center gap-md">
+<div class="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="A macro photography shot of a cold brown sugar boba milk tea in a clear cup, with thick tiger stripes of syrup on the sides and large dark pearls at the bottom. The lighting is soft and bright, highlighting the creamy texture and the refreshing minimalist cafe aesthetic of Boba Bliss." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe8-DKX4pqHwPE3_NPw0wlwDu-aJK61fBizULq7yOJYr7VPls_H39gi0kBkd2fw5sKOuZTH1tWG8yXwbFEjviNxV2Aw2yUs8IEbXxe72ls4LyWnLKNzyvXpWsIyQyOAWG_JR9grvJ7gaGGEmse9DYUXKpx0QnXFNyYiP4fryX0-SZz9niAuoQYmCFcEjFgn5Pi4J4QPnzfoI8KatfXBWm6XuBcsyGrWtEQ9dtE5FXuyE6E_BnrPHvmiQakykSEYNRlsF0Zdt2RuMpC"/>
+<div class="absolute top-1 right-1 bg-primary text-white w-5 h-5 rounded-full flex items-center justify-center font-label-sm text-[10px]">1</div>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Brown Sugar Deerioca</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Large, 50% Sugar, Less Ice</p>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary">$7.50</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="A beautifully layered matcha latte with a vibrant green tea top layer and creamy white milk bottom layer, served in a sleek glass cup with black boba pearls at the base. The setting is a clean, modern cafe with a soft pastel pink and mint green color palette, capturing the essence of a serene tea break." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB92_F04g-u_eRRjYWaFEIS0by5q0SsYutFegKZOOHoc3a5TiNuTUfNWhnTTZzRJlyPnKv8ZrbDQNwR99UT0khq4Jv8K83IKOQRoDZb4cAHJ00n61IBq1FFJu3XAMPxqQz4VHQXahHkPgy7RiLWPI-7ckoFuCyRkU4yBynXtiRkywc36Z6sCCpK5mzoxHg03bnW45BRn3iHMIoppv2GVa36CQL5NUxlArL05T2xeXvXA8DwcPsMVC7wN1BMTn06TS5BC9kOwIdFa1Ul"/>
+<div class="absolute top-1 right-1 bg-primary text-white w-5 h-5 rounded-full flex items-center justify-center font-label-sm text-[10px]">2</div>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Matcha Cloud Cream</h3>
+<p class="font-label-md text-label-md text-on-surface-variant">Medium, Oat Milk</p>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary">$13.00</span>
+</div>
+</div>
+<!-- Promo Code -->
+<div class="flex gap-sm mb-lg">
+<input class="flex-grow bg-surface border-none rounded-lg p-sm font-body-md" placeholder="Promo Code" type="text"/>
+<button class="bg-secondary text-white px-md rounded-lg font-label-md text-label-md hover:scale-95 transition-transform">Apply</button>
+</div>
+<!-- Totals -->
+<div class="border-t border-outline-variant pt-md space-y-sm mb-lg">
+<div class="flex justify-between text-on-surface-variant">
+<span class="font-body-md text-body-md">Subtotal</span>
+<span class="font-body-md text-body-md text-on-surface">$20.50</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="font-body-md text-body-md">Delivery Fee</span>
+<span class="font-body-md text-body-md text-on-surface">$2.99</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="font-body-md text-body-md">Tax</span>
+<span class="font-body-md text-body-md text-on-surface">$1.85</span>
+</div>
+<div class="flex justify-between border-t border-outline-variant pt-sm">
+<span class="font-headline-md text-headline-md text-on-background">Total</span>
+<span class="font-headline-md text-headline-md text-primary">$25.34</span>
+</div>
+</div>
+<!-- Place Order Button -->
+<button class="w-full bg-primary-container text-on-primary-container h-14 rounded-full font-headline-md text-headline-md flex items-center justify-center gap-sm active:scale-95 transition-all duration-200" id="orderBtn">
+<span>Place Order</span>
+<div class="boba-loader hidden" id="loader">
+<span></span><span></span><span></span>
+</div>
+</button>
+<!-- Secure Badges -->
+<div class="mt-md flex justify-center items-center gap-md text-on-surface-variant/60">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span class="font-label-sm text-label-sm">SSL Secured</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span class="font-label-sm text-label-sm">AES-256 Encryption</span>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container mt-lg py-xl">
+<div class="max-w-[1200px] mx-auto px-lg grid grid-cols-1 md:grid-cols-4 gap-md">
+<div class="col-span-1">
+<div class="font-headline-sm text-headline-sm font-bold text-primary mb-sm">Boba Bliss</div>
+<p class="text-on-surface-variant font-label-md text-label-md">Crafting refreshing moments one pearl at a time.</p>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm mb-sm text-on-surface">Company</h4>
+<div class="flex flex-col gap-xs">
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md" href="#">About Us</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md" href="#">Sustainability</a>
+</div>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm mb-sm text-on-surface">Support</h4>
+<div class="flex flex-col gap-xs">
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md text-label-md" href="#">Contact</a>
+</div>
+</div>
+<div class="flex flex-col justify-between">
+<div class="flex gap-md">
+<span class="material-symbols-outlined text-secondary">share</span>
+<span class="material-symbols-outlined text-secondary">favorite</span>
+</div>
+<div class="text-on-surface-variant font-label-md text-label-md mt-md">
+                    © 2024 Boba Bliss. All rights reserved.
+                </div>
+</div>
+</div>
+</footer>
+<script>
+        const orderBtn = document.getElementById('orderBtn');
+        const loader = document.getElementById('loader');
+        const btnText = orderBtn.querySelector('span');
+
+        orderBtn.addEventListener('click', () => {
+            btnText.classList.add('hidden');
+            loader.classList.remove('hidden');
+            orderBtn.disabled = true;
+            
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                btnText.textContent = "Thank you!";
+                btnText.classList.remove('hidden');
+                orderBtn.classList.replace('bg-primary-container', 'bg-secondary-container');
+                orderBtn.classList.replace('text-on-primary-container', 'text-on-secondary-container');
+            }, 2500);
+        });
+    </script>
+</body></html>

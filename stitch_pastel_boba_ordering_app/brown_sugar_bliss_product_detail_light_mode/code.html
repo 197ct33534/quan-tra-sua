@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .boba-bounce {
+            animation: boba-bounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite alternate;
+        }
+        @keyframes boba-bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-4px); }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d5c2c6;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#fff8f6",
+                        "primary-fixed-dim": "#fab3ca",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#1e1b16",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#6a364a",
+                        "secondary-fixed": "#bceddc",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#7b4458",
+                        "surface-container-high": "#efe6e3",
+                        "primary": "#864d61",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#d5c2c6",
+                        "on-secondary-container": "#406d60",
+                        "on-secondary-fixed": "#002019",
+                        "tertiary-fixed-dim": "#ccc6bc",
+                        "tertiary-fixed": "#e8e2d8",
+                        "secondary-container": "#bceddc",
+                        "inverse-on-surface": "#f8efec",
+                        "primary-container": "#ffb7ce",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e9e1de",
+                        "on-background": "#1e1b19",
+                        "surface-container-highest": "#e9e1de",
+                        "on-primary-fixed": "#360b1e",
+                        "inverse-surface": "#342f2e",
+                        "on-tertiary-fixed-variant": "#4a463f",
+                        "inverse-primary": "#fab3ca",
+                        "tertiary": "#625e56",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#e1d8d5",
+                        "background": "#fff8f6",
+                        "surface-bright": "#fff8f6",
+                        "on-tertiary-container": "#59554e",
+                        "secondary": "#3a675a",
+                        "secondary-fixed-dim": "#a1d0c1",
+                        "error-container": "#ffdad6",
+                        "outline": "#837377",
+                        "primary-fixed": "#ffd9e3",
+                        "on-surface-variant": "#514347",
+                        "tertiary-container": "#d0cac1",
+                        "surface-tint": "#864d61",
+                        "on-surface": "#1e1b19",
+                        "on-secondary-fixed-variant": "#214e43",
+                        "surface-container-low": "#fbf2ef",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#f5ece9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "64px",
+                        "margin-desktop": "auto",
+                        "sm": "12px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "base": "8px",
+                        "gutter": "16px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container custom-scrollbar">
+<!-- Top Navigation Bar -->
+<header class="bg-surface sticky top-0 z-50 shadow-[0px_10px_30px_rgba(74,69,67,0.05)]">
+<nav class="flex justify-between items-center h-20 px-lg max-w-[1200px] mx-auto w-full">
+<div class="flex items-center gap-base">
+<span class="font-headline-md text-headline-md font-bold text-primary">Boba Bliss</span>
+</div>
+<div class="hidden md:flex items-center gap-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Home</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-bold font-body-md text-body-md" href="#">Menu</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Orders</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Cart</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Profile</a>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-primary p-xs hover:bg-primary-container/20 rounded-full transition-all" data-icon="shopping_cart">shopping_cart</button>
+<button class="material-symbols-outlined text-primary p-xs hover:bg-primary-container/20 rounded-full transition-all" data-icon="account_circle">account_circle</button>
+</div>
+</nav>
+</header>
+<main class="max-w-[1200px] mx-auto px-lg py-lg">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-xs text-on-surface-variant mb-lg font-label-md text-label-md">
+<a class="hover:text-primary" href="#">Menu</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<a class="hover:text-primary" href="#">Classic Milk Teas</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-primary font-bold">Brown Sugar Bliss</span>
+</nav>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<!-- Left: Product Image Section -->
+<div class="lg:col-span-6">
+<div class="relative group rounded-xl overflow-hidden shadow-[0px_10px_30px_rgba(74,69,67,0.05)] bg-surface-container-lowest">
+<img alt="Brown Sugar Bliss Boba" class="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A premium close-up of a Brown Sugar Bliss boba tea in a sleek, minimalist tall glass. Rich, dark brown sugar syrup streaks cascade down the inside of the glass, mixing with creamy, off-white milk tea. Plump, glossy black tapioca pearls sit at the bottom. The lighting is soft and airy, typical of a high-end boutique cafe, emphasizing a clean, light-mode aesthetic with pastel pink and mint accents in the soft-focus background. The overall mood is refreshing, luxurious, and meticulously clean." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOS9y2GcjeFofj89zUWlfGFxR9fxj1Z28Z_6PiHhnyZp-KybqM48YtbSxG2y9do23CZL_2acKNlfRw3K8JVZCLMKf_JqIJmmyVi7oX68encnGwckBICpPV4DeVcaPdlKSMRUNhE2QM0LZuxC8yZ27FqCy1rzfbXZ3ev_ERZIWQ0UyK11s6zpLvtDvFUvJOaNRnMwyZpbma_fkedC2NvN7nC9EAMKVsaA7nxKDt5gl0YBfHeNUVtxdT4tSwCNkacEPNbciEqWxXUfgB"/>
+<div class="absolute top-md right-md flex flex-col gap-sm">
+<button class="bg-surface/80 backdrop-blur-md p-sm rounded-full text-primary hover:scale-110 active:scale-95 transition-all shadow-sm">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+<button class="bg-surface/80 backdrop-blur-md p-sm rounded-full text-primary hover:scale-110 active:scale-95 transition-all shadow-sm">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+</div>
+</div>
+<!-- Tea Story/Description -->
+<div class="mt-lg p-md bg-surface-container-low rounded-xl">
+<h3 class="font-headline-md text-headline-md text-primary mb-sm">A Ritual of Joy</h3>
+<p class="text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                        Our signature Brown Sugar Bliss is a masterpiece of textures and temperatures. We slow-cook our Grade-A tapioca pearls in house-made Okinawan brown sugar syrup for 4 hours until they achieve a perfect "QQ" chewiness. Layered with fresh organic whole milk and a whisper of premium Assam black tea, each sip is a swirling dance of caramel sweetness and refreshing creaminess.
+                    </p>
+</div>
+</div>
+<!-- Right: Customization & Info Section -->
+<div class="lg:col-span-6 flex flex-col gap-lg">
+<header>
+<div class="inline-flex items-center gap-xs px-sm py-xs bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md mb-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>Best Seller</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-background mb-xs">Brown Sugar Bliss</h1>
+<div class="flex items-center gap-md">
+<span class="text-primary font-headline-md text-headline-md">$6.50</span>
+<div class="flex items-center text-on-surface-variant">
+<div class="flex text-[#FFB800]">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 0.5;">star_half</span>
+</div>
+<span class="font-label-md text-label-md ml-xs">(1.2k Reviews)</span>
+</div>
+</div>
+</header>
+<!-- Customization Options -->
+<div class="flex flex-col gap-lg">
+<!-- Cup Size -->
+<section>
+<h4 class="font-label-md text-label-md text-on-surface mb-md flex items-center justify-between">
+                            Cup Size
+                            <span class="text-primary-container text-xs font-normal">Select one</span>
+</h4>
+<div class="grid grid-cols-2 gap-md">
+<button class="group flex flex-col items-center justify-center p-md rounded-xl border-2 border-primary-container bg-primary-container/10 text-on-primary-container transition-all active:scale-95">
+<span class="material-symbols-outlined text-[32px] mb-xs" data-icon="coffee">coffee</span>
+<span class="font-label-md text-label-md">Regular</span>
+<span class="text-[12px] opacity-70">16oz</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-md rounded-xl border-2 border-surface-container-high hover:border-primary-container hover:bg-primary-container/5 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[40px] mb-xs" data-icon="coffee">coffee</span>
+<span class="font-label-md text-label-md">Large</span>
+<span class="text-[12px] opacity-70">24oz (+$1.00)</span>
+</button>
+</div>
+</section>
+<!-- Ice Level -->
+<section>
+<h4 class="font-label-md text-label-md text-on-surface mb-md">Ice Level</h4>
+<div class="flex flex-wrap gap-sm">
+<button class="px-md py-sm rounded-full font-label-md text-label-md border-2 border-surface-container-high hover:border-primary-container transition-all active:scale-95">No Ice</button>
+<button class="px-md py-sm rounded-full font-label-md text-label-md border-2 border-surface-container-high hover:border-primary-container transition-all active:scale-95">Less Ice</button>
+<button class="px-md py-sm rounded-full font-label-md text-label-md bg-primary-container text-on-primary-container border-2 border-primary-container active:scale-95">Regular</button>
+<button class="px-md py-sm rounded-full font-label-md text-label-md border-2 border-surface-container-high hover:border-primary-container transition-all active:scale-95">Extra Ice</button>
+</div>
+</section>
+<!-- Sweetness Level -->
+<section>
+<div class="flex justify-between items-center mb-md">
+<h4 class="font-label-md text-label-md text-on-surface">Sweetness Level</h4>
+<span class="text-primary font-bold" id="sweetness-value">50%</span>
+</div>
+<div class="relative w-full h-10 flex items-center">
+<input class="w-full h-2 bg-surface-container-highest rounded-full appearance-none cursor-pointer accent-primary" max="100" min="0" oninput="document.getElementById('sweetness-value').innerText = this.value + '%'" step="25" type="range" value="50"/>
+<div class="absolute w-full flex justify-between px-1 -bottom-2">
+<span class="text-[10px] text-on-surface-variant font-bold">0%</span>
+<span class="text-[10px] text-on-surface-variant font-bold">25%</span>
+<span class="text-[10px] text-on-surface-variant font-bold">50%</span>
+<span class="text-[10px] text-on-surface-variant font-bold">75%</span>
+<span class="text-[10px] text-on-surface-variant font-bold">100%</span>
+</div>
+</div>
+</section>
+<!-- Toppings -->
+<section>
+<h4 class="font-label-md text-label-md text-on-surface mb-md">Toppings (Choose up to 3)</h4>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-sm">
+<button class="flex items-center gap-xs p-sm rounded-xl border-2 border-primary-container bg-primary-container/10 text-on-primary-container transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="radio_button_checked">radio_button_checked</span>
+<span class="font-label-md text-label-md">Extra Boba</span>
+</button>
+<button class="flex items-center gap-xs p-sm rounded-xl border-2 border-surface-container-high hover:border-secondary transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="circle">circle</span>
+<span class="font-label-md text-label-md">Lychee Jelly</span>
+</button>
+<button class="flex items-center gap-xs p-sm rounded-xl border-2 border-surface-container-high hover:border-secondary transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="circle">circle</span>
+<span class="font-label-md text-label-md">Grass Jelly</span>
+</button>
+<button class="flex items-center gap-xs p-sm rounded-xl border-2 border-surface-container-high hover:border-secondary transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="circle">circle</span>
+<span class="font-label-md text-label-md">Egg Pudding</span>
+</button>
+<button class="flex items-center gap-xs p-sm rounded-xl border-2 border-surface-container-high hover:border-secondary transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="circle">circle</span>
+<span class="font-label-md text-label-md">Cheese Foam</span>
+</button>
+<button class="flex items-center gap-xs p-sm rounded-xl border-2 border-surface-container-high hover:border-secondary transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="circle">circle</span>
+<span class="font-label-md text-label-md">Oat Milk</span>
+</button>
+</div>
+</section>
+</div>
+<!-- Footer Action -->
+<div class="mt-lg p-md bg-surface-container-high rounded-xl flex items-center gap-md">
+<div class="flex items-center bg-surface rounded-full p-xs border border-outline-variant">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container transition-all active:scale-90" onclick="updateQty(-1)">
+<span class="material-symbols-outlined" data-icon="remove">remove</span>
+</button>
+<span class="w-8 text-center font-bold" id="qty">1</span>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container transition-all active:scale-90" onclick="updateQty(1)">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<button class="flex-1 bg-primary text-on-primary py-md rounded-full font-headline-md text-headline-md flex items-center justify-center gap-sm hover:opacity-90 active:scale-[0.98] transition-all shadow-[0px_10px_30px_rgba(134,77,97,0.2)]">
+                        Add to Cart — $6.50
+                    </button>
+</div>
+</div>
+</div>
+<!-- Recommended / Upsell Section (Bento Style) -->
+<section class="mt-xl">
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-lg">You might also love</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md">
+<div class="md:col-span-2 group relative h-64 rounded-xl overflow-hidden shadow-sm bg-white p-md flex flex-col justify-end">
+<img alt="Matcha Cloud" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A lush green Matcha milk tea topped with a thick, velvety white cheese foam cloud. The drink is captured in a minimalist, brightly lit studio setting with soft pink shadows. The cup has visible boba pearls at the bottom. Elegant, clean aesthetic with high whitespace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_lxrShpyHpDeu2_snQyG6akQInz3BAsEMs8JqNNPM4NyQ50NGtp8T-HMIOOsJyG5ZYfX2dDoNImeIVPoIOReGP2ceU-dBhAoXjxj6comivmOSM4xwQnNjjRxYSyp82cIu9U2GBUEpxakhPNzUe729OhrXIHgbULVOWp3Kz7864y2sySrHUZO5TebKzVWOrRJpUtlIPC82rgi2x6B-DmQS5kPejY4f72PUviR6n3ywYQ4vPaE5fR5PH7tYq9S0YYjMABObBf-LqvXW"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="relative z-10 text-white">
+<p class="font-label-md text-label-md opacity-80">Seasonal Special</p>
+<h4 class="font-headline-md text-headline-md">Matcha Cloud</h4>
+<p class="font-body-md text-body-md">$7.25</p>
+</div>
+</div>
+<div class="group relative h-64 rounded-xl overflow-hidden shadow-sm bg-secondary-container p-md flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="bg-white/90 px-sm py-xs rounded-full font-label-sm text-label-sm text-secondary">Refreshing</span>
+<button class="bg-white/90 p-xs rounded-full text-secondary"><span class="material-symbols-outlined text-[18px]">add</span></button>
+</div>
+<div class="relative">
+<h4 class="font-headline-md text-headline-md text-on-secondary-container">Taro Twirl</h4>
+<p class="font-body-md text-body-md text-on-secondary-container/80">$6.75</p>
+</div>
+</div>
+<div class="group relative h-64 rounded-xl overflow-hidden shadow-sm bg-primary-container p-md flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="bg-white/90 px-sm py-xs rounded-full font-label-sm text-label-sm text-primary">Sweet</span>
+<button class="bg-white/90 p-xs rounded-full text-primary"><span class="material-symbols-outlined text-[18px]">add</span></button>
+</div>
+<div class="relative">
+<h4 class="font-headline-md text-headline-md text-on-primary-container">Strawberry Silk</h4>
+<p class="font-body-md text-body-md text-on-primary-container/80">$6.95</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container mt-lg border-t border-surface-container-high">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md px-lg py-xl max-w-[1200px] mx-auto">
+<div class="flex flex-col gap-sm">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">Boba Bliss</span>
+<p class="text-on-surface-variant font-label-md text-label-md max-w-xs">
+                    Crafting the perfect tea ritual, one pearl at a time. Sustainability and delight in every sip.
+                </p>
+</div>
+<div class="flex flex-col gap-sm">
+<h5 class="font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider">Quick Links</h5>
+<nav class="flex flex-col gap-xs">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">About Us</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Sustainability</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Contact</a>
+</nav>
+</div>
+<div class="flex flex-col gap-sm">
+<h5 class="font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider">Find Us</h5>
+<p class="text-on-surface-variant font-label-md text-label-md">
+                    123 Tea Garden Lane<br/>
+                    San Francisco, CA 94103
+                </p>
+</div>
+<div class="flex flex-col gap-sm">
+<h5 class="font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider">Follow Us</h5>
+<div class="flex gap-md">
+<a class="text-primary hover:scale-110 transition-transform" href="#"><span class="material-symbols-outlined">brand_awareness</span></a>
+<a class="text-primary hover:scale-110 transition-transform" href="#"><span class="material-symbols-outlined">camera</span></a>
+<a class="text-primary hover:scale-110 transition-transform" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+<div class="mt-base">
+<p class="font-label-md text-label-md text-on-surface-variant">© 2024 Boba Bliss. All rights reserved.</p>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        let quantity = 1;
+        function updateQty(delta) {
+            quantity = Math.max(1, quantity + delta);
+            document.getElementById('qty').innerText = quantity;
+        }
+
+        // Add to cart animation feedback
+        document.querySelector('button.bg-primary').addEventListener('click', function() {
+            const btn = this;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined boba-bounce">bubble_chart</span> Adding...';
+            btn.classList.add('opacity-80');
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Added to Cart!';
+                btn.classList.replace('bg-primary', 'bg-secondary');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.replace('bg-secondary', 'bg-primary');
+                    btn.classList.remove('opacity-80');
+                }, 2000);
+            }, 1000);
+        });
+    </script>
+</body></html>
