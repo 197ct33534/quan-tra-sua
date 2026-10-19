@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Topping;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -36,9 +37,17 @@ class OrderFlowTest extends TestCase
         ]);
     }
 
-    public function test_khach_chua_dang_nhap_bi_chuyen_ve_login_khi_checkout(): void
+    public function test_khach_vanglai_vao_duoc_trang_thanh_toan(): void
     {
-        $this->get('/thanh-toan')->assertRedirect(route('login'));
+        $product = $this->product();
+
+        $this->post(route('cart.add'), [
+            'product_id' => $product->id,
+            'quantity' => 1,
+            'size' => 'M',
+        ]);
+
+        $this->get(route('checkout.index'))->assertOk();
     }
 
     public function test_them_san_pham_vao_gio(): void
@@ -77,6 +86,8 @@ class OrderFlowTest extends TestCase
             'phone' => '0900000000',
             'address' => '123 Đường ABC',
             'note' => 'Giao nhanh',
+            'fulfillment' => 'delivery',
+            'payment_method' => 'cod',
         ]);
 
         $this->assertDatabaseHas('orders', [
@@ -99,7 +110,7 @@ class OrderFlowTest extends TestCase
 
         // order_code đúng định dạng TS + ngày + 4 ký tự
         $order = \App\Models\Order::first();
-        $this->assertMatchesRegularExpression('/^TS\d{6}[A-Z0-9]{4}$/', $order->order_code);
+        $this->assertMatchesRegularExpression('/^ORD-\d{8}-[A-Z0-9]{4}$/', $order->order_code);
 
         // redirect tới trang theo dõi đơn
         $response->assertRedirect(route('orders.show', $order->order_code));
@@ -115,8 +126,10 @@ class OrderFlowTest extends TestCase
         $this->actingAs($user);
         $this->post(route('cart.add'), ['product_id' => $product->id, 'quantity' => 1, 'size' => 'M']);
 
-        $this->post(route('checkout.store'), [])
-            ->assertSessionHasErrors(['customer_name', 'phone', 'address']);
+        $this->post(route('checkout.store'), [
+            'fulfillment' => 'delivery',
+            'payment_method' => 'cod',
+        ])->assertSessionHasErrors(['customer_name', 'phone', 'address']);
     }
 
     public function test_khach_xem_duoc_don_cua_minh(): void
@@ -126,12 +139,73 @@ class OrderFlowTest extends TestCase
         $this->actingAs($user);
         $this->post(route('cart.add'), ['product_id' => $product->id, 'quantity' => 1, 'size' => 'M']);
         $this->post(route('checkout.store'), [
-            'customer_name' => 'A', 'phone' => '0900000000', 'address' => '123',
+            'customer_name' => 'A',
+            'phone' => '0900000000',
+            'address' => '123',
+            'fulfillment' => 'delivery',
+            'payment_method' => 'cod',
         ]);
 
         $order = \App\Models\Order::first();
         $this->get(route('orders.show', $order->order_code))
             ->assertOk()
             ->assertSee($order->order_code);
+    }
+
+    public function test_trang_do_uong_render_size_tu_db_va_duong_da(): void
+    {
+        $product = $this->product();
+        $product->sizes()->where('code', 'L')->update(['price' => 12000]);
+
+        $this->get(route('products.show', $product->slug))
+            ->assertOk()
+            ->assertSee('data-fee="12000"', false)
+            ->assertSee('name="sugar"', false)
+            ->assertSee('name="ice"', false)
+            ->assertSee('Không đường')
+            ->assertSee('Không đá')
+            ->assertDontSee('name="spice"', false)
+            ->assertSee('property="og:title"', false)
+            ->assertSee('property="og:image"', false)
+            ->assertSee($product->name.' — 25.000đ', false)
+            ->assertSee('id="sticky-price"', false)
+            ->assertDontSee('cdn.tailwindcss.com', false);
+    }
+
+    public function test_trang_banh_trang_render_muc_cay(): void
+    {
+        $product = $this->product();
+        $product->update(['has_options' => false]);
+
+        $this->get(route('products.show', $product->slug))
+            ->assertOk()
+            ->assertSee('name="spice"', false)
+            ->assertSee('Cay vừa')
+            ->assertSee('Không cay')
+            ->assertDontSee('name="sugar"', false);
+    }
+
+    public function test_gio_hang_in_tom_tat_bien_the(): void
+    {
+        $product = $this->product();
+        $topping = \App\Models\Topping::create([
+            'name' => 'Trân châu trắng',
+            'price' => 5000,
+            'is_active' => true,
+        ]);
+
+        $this->post(route('cart.add'), [
+            'product_id' => $product->id,
+            'quantity' => 1,
+            'size' => 'L',
+            'sugar' => 50,
+            'ice' => 70,
+            'toppings' => [$topping->id],
+        ])->assertRedirect(route('cart.index'));
+
+        $this->get(route('cart.index'))
+            ->assertOk()
+            ->assertSee('Size L | 50% Đường | 70% Đá | Topping Trân châu trắng')
+            ->assertSee('name="row_id"', false);
     }
 }

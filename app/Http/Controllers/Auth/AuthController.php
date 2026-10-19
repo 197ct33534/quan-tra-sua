@@ -75,6 +75,10 @@ class AuthController extends Controller
             return redirect()->intended(route('admin.dashboard'));
         }
 
+        if ($user->isStaff()) {
+            return redirect()->intended(route('admin.orders.index'));
+        }
+
         return redirect()->intended(route('home'))->with('success', 'Đăng nhập thành công!');
     }
 

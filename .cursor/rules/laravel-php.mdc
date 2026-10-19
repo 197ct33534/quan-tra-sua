@@ -1,0 +1,23 @@
+---
+description: Quy ước PHP Laravel — validate, lỗi, tiền
+globs: "**/*.php"
+alwaysApply: false
+---
+
+# PHP
+
+- Validation nằm trong `app/Http/Requests`, không nhét mảng rule dài trong controller. Attribute tiếng Việt.
+- Redirect kèm `success` hoặc `error`. Không nuốt exception. Lỗi nghiệp vụ trả message cho người dùng, log chi tiết ở server.
+- Giá, phí, giảm giá, tổng: `int` VND. Không dùng `float`.
+- Đọc giá sản phẩm, size, topping từ DB lúc thêm giỏ. Lưu snapshot trên dòng giỏ và `order_items`. Không tin input giá từ client.
+- Checkout tính lại subtotal từ snapshot trong session, rồi áp coupon và phí ship. Từ chối món `is_available = false` và topping `is_active = false`.
+- Sửa `user_id` đơn hàng thành nullable cho khách vãng lai. Khách đã đăng nhập vẫn gắn `user_id`.
+- Khách vãng lai xem lại đơn bằng mã đơn kèm đúng SĐT. Không mở trang đơn chỉ bằng mã.
+- Role `staff` chỉ đơn hàng, in bill, bật/tắt còn hàng. CRUD danh mục/sản phẩm/topping/coupon dành cho `admin`.
+- Trạng thái đi `pending → confirmed → preparing → delivering → completed`. Khách hoặc admin chỉ hủy khi `pending` hoặc `confirmed`.
+- Test feature khi đổi giỏ, checkout, coupon, ship, quyền admin/staff.
+
+```php
+// ❌ $sizeFee = $size === 'M' ? 5000 : 10000;
+// ✅ $sizeFee = $product->sizeFee($size); // đọc product_sizes
+```

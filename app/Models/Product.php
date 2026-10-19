@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
@@ -19,9 +20,50 @@ class Product extends Model
         'price' => 'integer',
     ];
 
+    protected static function booted(): void
+    {
+        static::saved(function (Product $product) {
+            if ($product->has_options && $product->sizes()->doesntExist()) {
+                $product->seedDefaultSizes();
+            }
+        });
+    }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function sizes(): HasMany
+    {
+        return $this->hasMany(ProductSize::class)->orderBy('sort_order');
+    }
+
+    public function sizeFee(?string $size): int
+    {
+        if (! $size) {
+            return 0;
+        }
+
+        return (int) ($this->sizes()->where('code', $size)->value('price') ?? 0);
+    }
+
+    public function seedDefaultSizes(): void
+    {
+        $defaults = [
+            ['S', 'Nhỏ (S)', 0, 0],
+            ['M', 'Vừa (M)', 5000, 1],
+            ['L', 'Lớn (L)', 10000, 2],
+        ];
+
+        foreach ($defaults as [$code, $label, $price, $sort]) {
+            $this->sizes()->create([
+                'code' => $code,
+                'label' => $label,
+                'price' => $price,
+                'sort_order' => $sort,
+            ]);
+        }
     }
 
     public function getImageUrlAttribute(): string

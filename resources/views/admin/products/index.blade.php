@@ -9,9 +9,11 @@
             <input type="search" name="q" class="form-control" placeholder="Tìm sản phẩm..." value="{{ request('q') }}">
             <button class="btn btn-outline-secondary ms-1"><i class="bi bi-search"></i></button>
         </form>
-        <a href="{{ route('admin.products.create') }}" class="btn btn-brand">
-            <i class="bi bi-plus-lg"></i> Thêm sản phẩm
-        </a>
+        @if(auth()->user()->isAdmin())
+            <a href="{{ route('admin.products.create') }}" class="btn btn-brand">
+                <i class="bi bi-plus-lg"></i> Thêm sản phẩm
+            </a>
+        @endif
     </div>
     <div class="card shadow-sm border-0">
         <div class="table-responsive">
@@ -35,20 +37,25 @@
                                 @if($product->has_options)<span class="badge bg-info">Size/Topping</span>@else—@endif
                             </td>
                             <td class="text-center">
-                                @if($product->is_available)
-                                    <span class="badge bg-success">Còn</span>
-                                @else
-                                    <span class="badge bg-secondary">Hết</span>
-                                @endif
+                                <div class="form-check form-switch d-inline-flex align-items-center gap-2">
+                                    <input class="form-check-input availability-toggle" type="checkbox" role="switch"
+                                           data-url="{{ route('admin.products.availability', $product) }}"
+                                           data-field="available"
+                                           data-on="Còn" data-off="Hết"
+                                           @checked($product->is_available)>
+                                    <span class="availability-label small">{{ $product->is_available ? 'Còn' : 'Hết' }}</span>
+                                </div>
                             </td>
                             <td class="text-end">
-                                <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-pencil"></i></a>
-                                <form action="{{ route('admin.products.destroy', $product) }}" method="POST" class="d-inline"
-                                      onsubmit="return confirm('Xóa sản phẩm này?');">
-                                    @csrf @method('DELETE')
-                                    <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                                </form>
+                                @if(auth()->user()->isAdmin())
+                                    <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-pencil"></i></a>
+                                    <form action="{{ route('admin.products.destroy', $product) }}" method="POST" class="d-inline"
+                                          onsubmit="return confirm('Xóa sản phẩm này?');">
+                                        @csrf @method('DELETE')
+                                        <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @empty

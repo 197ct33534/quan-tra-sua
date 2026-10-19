@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -23,5 +24,20 @@ class OrderController extends Controller
             ->firstOrFail();
 
         return view('orders.show', compact('order'));
+    }
+
+    public function cancel(string $code): RedirectResponse
+    {
+        $order = Order::where('order_code', $code)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+
+        if (! $order->canBeCancelled()) {
+            return back()->with('error', 'Chỉ hủy được đơn khi đang chờ xác nhận hoặc đã xác nhận.');
+        }
+
+        $order->update(['status' => 'cancelled']);
+
+        return back()->with('success', 'Đã hủy đơn hàng.');
     }
 }

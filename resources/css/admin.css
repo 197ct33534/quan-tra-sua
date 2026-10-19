@@ -1,0 +1,48 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+body {
+    background: #f4f6f9;
+}
+
+.sidebar {
+    background: #2b2118;
+    min-height: 100vh;
+}
+
+.sidebar .nav-link {
+    color: #d8cfc4;
+    border-radius: .375rem;
+}
+
+.sidebar .nav-link:hover {
+    background: rgba(255, 255, 255, .08);
+    color: #fff;
+}
+
+.sidebar .nav-link.active {
+    background: #b5651d;
+    color: #fff;
+}
+
+.sidebar .brand {
+    color: #f3c98b;
+    font-weight: 700;
+}
+
+.btn-brand {
+    background: #b5651d;
+    border-color: #b5651d;
+    color: #fff;
+}
+
+.btn-brand:hover,
+.btn-brand:focus {
+    background: #9a5418;
+    border-color: #9a5418;
+    color: #fff;
+}
+
+.text-brand {
+    color: #b5651d;
+}

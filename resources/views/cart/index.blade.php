@@ -30,14 +30,7 @@
                                     <h3 class="text-headline-sm text-on-surface">{{ $item['name'] }}</h3>
                                     <span class="text-headline-sm text-primary whitespace-nowrap">@vnd($item['line_total'])</span>
                                 </div>
-                                <div class="flex flex-wrap gap-xs mt-sm">
-                                    @if($item['size_label'])
-                                        <span class="px-sm py-1 bg-tertiary-container text-on-tertiary-container rounded-full text-label-sm">{{ $item['size_label'] }}</span>
-                                    @endif
-                                    @foreach($item['toppings'] as $tp)
-                                        <span class="px-sm py-1 bg-primary-container text-on-primary-container rounded-full text-label-sm">+ {{ $tp['name'] }}</span>
-                                    @endforeach
-                                </div>
+                                @include('partials.cart-variant-summary', ['item' => $item])
                             </div>
                             <div class="flex justify-between items-center mt-md">
                                 <form action="{{ route('cart.update') }}" method="POST" class="flex items-center bg-surface-container rounded-full px-xs py-xs border border-outline-variant/40">
@@ -73,12 +66,32 @@
                         <div class="flex justify-between text-on-surface-variant text-body-md">
                             <span>Tạm tính ({{ $cartCount }} món)</span><span>@vnd($subtotal)</span>
                         </div>
+                        @if(($discount ?? 0) > 0)
+                            <div class="flex justify-between text-on-surface-variant text-body-md">
+                                <span>Giảm giá ({{ $couponCode }})</span><span>-@vnd($discount)</span>
+                            </div>
+                        @endif
                         <div class="flex justify-between text-on-surface-variant text-body-md">
                             <span>Phí giao hàng</span><span class="opacity-70">Tính khi thanh toán</span>
                         </div>
+                        @if($couponNotice)
+                            <p class="text-label-md text-error">{{ $couponNotice }}</p>
+                        @endif
+                        <form action="{{ route('cart.coupon.apply') }}" method="POST" class="flex gap-xs pt-xs">
+                            @csrf
+                            <input type="text" name="code" value="{{ $couponCode }}" placeholder="Mã giảm giá" maxlength="50"
+                                   class="flex-grow px-sm py-xs rounded-lg bg-surface border border-outline-variant/40 text-label-md uppercase">
+                            <button class="px-sm py-xs rounded-lg bg-primary text-on-primary text-label-md">Áp dụng</button>
+                        </form>
+                        @if($couponCode)
+                            <form action="{{ route('cart.coupon.remove') }}" method="POST">
+                                @csrf @method('DELETE')
+                                <button class="text-label-md text-on-surface-variant hover:text-error">Gỡ mã {{ $couponCode }}</button>
+                            </form>
+                        @endif
                         <div class="pt-sm border-t border-outline-variant/30 flex justify-between items-center mt-md">
-                            <span class="text-headline-md text-on-surface">Tạm tính</span>
-                            <span class="text-headline-md text-primary">@vnd($subtotal)</span>
+                            <span class="text-headline-md text-on-surface">{{ ($discount ?? 0) > 0 ? 'Sau giảm giá' : 'Tạm tính' }}</span>
+                            <span class="text-headline-md text-primary">@vnd($subtotal - ($discount ?? 0))</span>
                         </div>
                     </div>
                     <a href="{{ route('checkout.index') }}" class="w-full mt-lg bg-primary text-on-primary py-md rounded-xl text-headline-sm shadow-soft hover:opacity-90 transition-all active:scale-95 flex items-center justify-center gap-sm">

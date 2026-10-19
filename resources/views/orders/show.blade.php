@@ -15,8 +15,13 @@
 
 @section('content')
 <div class="max-w-[1200px] mx-auto px-md md:px-lg py-lg">
-    <a href="{{ route('orders.index') }}" class="inline-flex items-center gap-xs text-primary text-label-md hover:underline mb-md">
-        <span class="material-symbols-outlined text-[20px]">arrow_back</span> Danh sách đơn</a>
+    @if(!empty($placed) || !empty($tracking))
+        <a href="{{ route('home') }}" class="inline-flex items-center gap-xs text-primary text-label-md hover:underline mb-md">
+            <span class="material-symbols-outlined text-[20px]">arrow_back</span> Về trang chủ</a>
+    @else
+        <a href="{{ route('orders.index') }}" class="inline-flex items-center gap-xs text-primary text-label-md hover:underline mb-md">
+            <span class="material-symbols-outlined text-[20px]">arrow_back</span> Danh sách đơn</a>
+    @endif
 
     <div class="flex flex-wrap justify-between items-center gap-sm mb-lg">
         <h1 class="text-headline-xl text-on-surface">Đơn <span class="text-primary">{{ $order->order_code }}</span></h1>
@@ -37,6 +42,15 @@
                                     @if($item->size)
                                         <span class="px-sm py-1 bg-tertiary-container text-on-tertiary-container rounded-full text-label-sm">Size {{ $item->size }}</span>
                                     @endif
+                                    @if($item->sugar !== null)
+                                        <span class="px-sm py-1 bg-secondary-container text-on-secondary-container rounded-full text-label-sm">{{ \App\Models\OrderItem::sugarLabel($item->sugar) }}</span>
+                                    @endif
+                                    @if($item->ice !== null)
+                                        <span class="px-sm py-1 bg-secondary-container text-on-secondary-container rounded-full text-label-sm">{{ \App\Models\OrderItem::iceLabel($item->ice) }}</span>
+                                    @endif
+                                    @if($item->spice)
+                                        <span class="px-sm py-1 bg-secondary-container text-on-secondary-container rounded-full text-label-sm">{{ \App\Models\OrderItem::spiceLabel($item->spice) }}</span>
+                                    @endif
                                     @foreach(($item->toppings ?? []) as $tp)
                                         <span class="px-sm py-1 bg-primary-container text-on-primary-container rounded-full text-label-sm">+ {{ $tp['name'] }}</span>
                                     @endforeach
@@ -55,7 +69,7 @@
                 <h2 class="text-headline-sm text-on-surface mb-sm">Thông tin giao hàng</h2>
                 <p class="text-body-md text-on-surface-variant flex items-center gap-xs"><span class="material-symbols-outlined text-[20px] text-primary">person</span> {{ $order->customer_name }}</p>
                 <p class="text-body-md text-on-surface-variant flex items-center gap-xs"><span class="material-symbols-outlined text-[20px] text-primary">call</span> {{ $order->phone }}</p>
-                <p class="text-body-md text-on-surface-variant flex items-center gap-xs"><span class="material-symbols-outlined text-[20px] text-primary">location_on</span> {{ $order->address }}</p>
+                <p class="text-body-md text-on-surface-variant flex items-center gap-xs"><span class="material-symbols-outlined text-[20px] text-primary">location_on</span> {{ $order->fulfillment === 'takeaway' ? 'Nhận tại quán' : $order->address }}</p>
                 @if($order->note)
                     <p class="text-body-md text-on-surface-variant flex items-center gap-xs"><span class="material-symbols-outlined text-[20px] text-primary">chat</span> {{ $order->note }}</p>
                 @endif
@@ -63,14 +77,31 @@
             <div class="bg-surface-container-high rounded-xl p-md shadow-soft">
                 <div class="space-y-sm text-body-md">
                     <div class="flex justify-between text-on-surface-variant"><span>Tạm tính</span><span>@vnd($order->subtotal)</span></div>
+                    @if($order->discount > 0)
+                        <div class="flex justify-between text-on-surface-variant"><span>Giảm giá @if($order->coupon_code)({{ $order->coupon_code }})@endif</span><span>-@vnd($order->discount)</span></div>
+                    @endif
                     <div class="flex justify-between text-on-surface-variant"><span>Phí giao hàng</span><span>@vnd($order->shipping_fee)</span></div>
                     <div class="pt-sm border-t border-outline-variant/30 flex justify-between items-center">
                         <span class="text-headline-md text-on-surface">Tổng cộng</span>
                         <span class="text-headline-md text-primary">@vnd($order->total)</span>
                     </div>
                 </div>
-                <p class="text-label-sm text-on-surface-variant mt-md">Thanh toán: COD · Đặt lúc {{ $order->created_at->format('d/m/Y H:i') }}</p>
+                <p class="text-label-sm text-on-surface-variant mt-md">Thanh toán: {{ $order->payment_method === 'vietqr' ? 'Chuyển khoản VietQR' : 'Tiền mặt' }} · Đặt lúc {{ $order->created_at->format('d/m/Y H:i') }}</p>
             </div>
+            @include('partials.vietqr')
+            @if($order->canBeCancelled() && (!empty($tracking) || !empty($placed)))
+                <form action="{{ route('track.cancel') }}" method="POST" onsubmit="return confirm('Hủy đơn hàng này?');">
+                    @csrf
+                    <input type="hidden" name="order_code" value="{{ $order->order_code }}">
+                    <input type="hidden" name="phone" value="{{ $order->phone }}">
+                    <button class="w-full py-sm rounded-xl border border-error text-error text-label-md">Hủy đơn</button>
+                </form>
+            @elseif($order->canBeCancelled() && auth()->id() === $order->user_id)
+                <form action="{{ route('orders.cancel', $order->order_code) }}" method="POST" onsubmit="return confirm('Hủy đơn hàng này?');">
+                    @csrf
+                    <button class="w-full py-sm rounded-xl border border-error text-error text-label-md">Hủy đơn</button>
+                </form>
+            @endif
         </aside>
     </div>
 </div>

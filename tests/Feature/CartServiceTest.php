@@ -114,6 +114,45 @@ class CartServiceTest extends TestCase
         $this->assertCount(2, $this->cart->items());
     }
 
+    public function test_phi_size_lay_tu_database(): void
+    {
+        $product = $this->product(['price' => 25000, 'has_options' => true]);
+        $product->sizes()->where('code', 'M')->update(['price' => 8000]);
+
+        $this->cart->add($product, 1, 'M');
+
+        $this->assertSame(33000, $this->cart->subtotal());
+    }
+
+    public function test_khac_duong_hoac_da_thi_tach_dong(): void
+    {
+        $product = $this->product(['price' => 25000, 'has_options' => true]);
+
+        $this->cart->add($product, 1, 'L', [], ['sugar' => 100, 'ice' => 100]);
+        $this->cart->add($product, 1, 'L', [], ['sugar' => 30, 'ice' => 0]);
+
+        $items = array_values($this->cart->items());
+        $this->assertCount(2, $items);
+        $this->assertSame(100, $items[0]['sugar']);
+        $this->assertSame(0, $items[1]['ice']);
+        $this->assertNull($items[0]['spice']);
+    }
+
+    public function test_banh_trang_luu_muc_cay_khong_luu_duong_da(): void
+    {
+        $product = $this->product(['price' => 20000, 'has_options' => false]);
+
+        $this->cart->add($product, 1, null, [], ['spice' => 'hot', 'sugar' => 0, 'ice' => 0]);
+
+        $items = array_values($this->cart->items());
+        $this->assertSame('hot', $items[0]['spice']);
+        $this->assertSame('Cay nhiều', $items[0]['spice_label']);
+        $this->assertNull($items[0]['size']);
+        $this->assertNull($items[0]['sugar']);
+        $this->assertNull($items[0]['ice']);
+        $this->assertSame(20000, $items[0]['unit_price']);
+    }
+
     public function test_cap_nhat_so_luong(): void
     {
         $product = $this->product(['price' => 25000]);

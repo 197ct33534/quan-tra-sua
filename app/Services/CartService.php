@@ -2,47 +2,62 @@
 
 namespace App\Services;
 
+use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\ProductSize;
 use App\Models\Topping;
 use Illuminate\Support\Facades\Session;
+use InvalidArgumentException;
 
 class CartService
 {
     protected string $key = 'cart';
 
     /**
-     * Toàn bộ item trong giỏ.
-     * Mỗi item: rowId => [product_id, name, price, quantity, size, size_label,
-     *                     toppings (array of [id,name,price]), options_fee, unit_price, line_total]
+     * Mỗi item: rowId => product, size, sugar, ice, spice, toppings, giá snapshot.
      */
     public function items(): array
     {
         return Session::get($this->key, []);
     }
 
-    public function add(Product $product, int $quantity = 1, ?string $size = null, array $toppingIds = []): void
+    /**
+     * @param  array{sugar?: int|string|null, ice?: int|string|null, spice?: string|null}  $variants
+     */
+    public function add(Product $product, int $quantity = 1, ?string $size = null, array $toppingIds = [], array $variants = []): void
     {
-        $sizeFee = $this->sizeFee($size);
+        $sugar = null;
+        $ice = null;
+        $spice = null;
+        $sizeFee = 0;
+        $sizeLabel = null;
+        $sizeRow = null;
+
+        if ($product->has_options) {
+            $sizeRow = $this->resolveSize($product, $size);
+            $size = $sizeRow->code;
+            $sizeFee = (int) $sizeRow->price;
+            $sizeLabel = $this->formatSizeLabel($sizeRow);
+            $sugar = $this->normalizeLevel($variants['sugar'] ?? 100, OrderItem::SUGAR_LEVELS, 'Mức đường không hợp lệ.');
+            $ice = $this->normalizeLevel($variants['ice'] ?? 100, OrderItem::ICE_LEVELS, 'Mức đá không hợp lệ.');
+        } else {
+            $size = null;
+            $spice = $this->normalizeSpice($variants['spice'] ?? 'none');
+        }
 
         $toppings = [];
         $toppingsFee = 0;
         if ($product->has_options && ! empty($toppingIds)) {
             $rows = Topping::active()->whereIn('id', $toppingIds)->get();
             foreach ($rows as $t) {
-                $toppings[] = ['id' => $t->id, 'name' => $t->name, 'price' => $t->price];
-                $toppingsFee += $t->price;
+                $toppings[] = ['id' => $t->id, 'name' => $t->name, 'price' => (int) $t->price];
+                $toppingsFee += (int) $t->price;
             }
         }
 
-        if (! $product->has_options) {
-            $size = null;
-            $sizeFee = 0;
-        }
-
         $optionsFee = $sizeFee + $toppingsFee;
-        $unitPrice = $product->price + $optionsFee;
-
-        $rowId = $this->makeRowId($product->id, $size, array_column($toppings, 'id'));
+        $unitPrice = (int) $product->price + $optionsFee;
+        $rowId = $this->makeRowId($product->id, $size, $sugar, $ice, $spice, array_column($toppings, 'id'));
 
         $cart = $this->items();
 
@@ -53,9 +68,15 @@ class CartService
                 'product_id' => $product->id,
                 'name' => $product->name,
                 'image_url' => $product->image_url,
-                'base_price' => $product->price,
+                'base_price' => (int) $product->price,
                 'size' => $size,
-                'size_label' => $size ? $this->sizeLabel($size) : null,
+                'size_label' => $sizeLabel,
+                'sugar' => $sugar,
+                'sugar_label' => OrderItem::sugarLabel($sugar),
+                'ice' => $ice,
+                'ice_label' => OrderItem::iceLabel($ice),
+                'spice' => $spice,
+                'spice_label' => OrderItem::spiceLabel($spice),
                 'toppings' => $toppings,
                 'options_fee' => $optionsFee,
                 'unit_price' => $unitPrice,
@@ -112,29 +133,82 @@ class CartService
         return empty($this->items());
     }
 
-    protected function sizeFee(?string $size): int
+    public function unavailableMessage(): ?string
     {
-        return match ($size) {
-            'M' => 5000,
-            'L' => 10000,
-            default => 0,
-        };
+        foreach ($this->items() as $item) {
+            $product = Product::find($item['product_id'] ?? 0);
+            if (! $product || ! $product->is_available) {
+                return 'Món ' . ($item['name'] ?? 'này') . ' hiện vừa hết hàng, vui lòng xóa khỏi giỏ để tiếp tục.';
+            }
+
+            foreach ($item['toppings'] ?? [] as $topping) {
+                $row = Topping::where('id', $topping['id'] ?? 0)->where('is_active', true)->first();
+                if (! $row) {
+                    return 'Topping ' . ($topping['name'] ?? 'đã chọn') . ' hiện vừa hết hàng, vui lòng xóa khỏi giỏ để tiếp tục.';
+                }
+            }
+        }
+
+        return null;
     }
 
-    public function sizeLabel(string $size): string
+    protected function resolveSize(Product $product, ?string $size): ProductSize
     {
-        return match ($size) {
-            'S' => 'Nhỏ (S)',
-            'M' => 'Vừa (M) +5.000đ',
-            'L' => 'Lớn (L) +10.000đ',
-            default => $size,
-        };
+        $query = $product->sizes();
+        $row = $size
+            ? $query->where('code', $size)->first()
+            : $product->sizes()->orderBy('sort_order')->first();
+
+        if (! $row) {
+            throw new InvalidArgumentException('Sản phẩm chưa có kích cỡ hợp lệ.');
+        }
+
+        return $row;
     }
 
-    protected function makeRowId(int $productId, ?string $size, array $toppingIds): string
+    protected function formatSizeLabel(ProductSize $size): string
+    {
+        if ((int) $size->price <= 0) {
+            return $size->label;
+        }
+
+        return $size->label . ' +' . number_format((int) $size->price, 0, ',', '.') . 'đ';
+    }
+
+    /**
+     * @param  array<int, int>  $allowed
+     */
+    protected function normalizeLevel(int|string|null $value, array $allowed, string $message): int
+    {
+        $level = (int) $value;
+        if (! in_array($level, $allowed, true)) {
+            throw new InvalidArgumentException($message);
+        }
+
+        return $level;
+    }
+
+    protected function normalizeSpice(?string $spice): string
+    {
+        $spice = $spice ?: 'none';
+        if (! array_key_exists($spice, OrderItem::SPICE_LEVELS)) {
+            throw new InvalidArgumentException('Mức cay không hợp lệ.');
+        }
+
+        return $spice;
+    }
+
+    protected function makeRowId(int $productId, ?string $size, ?int $sugar, ?int $ice, ?string $spice, array $toppingIds): string
     {
         sort($toppingIds);
 
-        return md5($productId . '|' . ($size ?? '') . '|' . implode(',', $toppingIds));
+        return md5(implode('|', [
+            $productId,
+            $size ?? '',
+            $sugar ?? '',
+            $ice ?? '',
+            $spice ?? '',
+            implode(',', $toppingIds),
+        ]));
     }
 }

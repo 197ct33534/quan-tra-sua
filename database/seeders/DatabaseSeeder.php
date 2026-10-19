@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Topping;
 use App\Models\User;
@@ -22,6 +23,17 @@ class DatabaseSeeder extends Seeder
                 'phone' => '0900000001',
                 'address' => 'Cửa hàng Trà Sữa',
                 'role' => 'admin',
+                'password' => Hash::make('password'),
+            ]
+        );
+
+        User::updateOrCreate(
+            ['email' => 'staff@trasua.test'],
+            [
+                'name' => 'Nhân viên quầy',
+                'phone' => '0900000003',
+                'address' => 'Cửa hàng Trà Sữa',
+                'role' => 'staff',
                 'password' => Hash::make('password'),
             ]
         );
@@ -114,5 +126,16 @@ class DatabaseSeeder extends Seeder
                 );
             }
         }
+
+        Coupon::updateOrCreate(
+            ['code' => 'KHAITRUONG'],
+            [
+                'type' => Coupon::TYPE_PERCENT,
+                'value' => 10,
+                'min_order_value' => 0,
+                'expires_at' => null,
+                'is_active' => true,
+            ]
+        );
     }
 }

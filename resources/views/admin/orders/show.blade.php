@@ -4,9 +4,14 @@
 @section('heading', 'Chi tiết đơn hàng')
 
 @section('content')
-    <a href="{{ route('admin.orders.index') }}" class="btn btn-outline-secondary btn-sm mb-3">
-        <i class="bi bi-arrow-left"></i> Danh sách đơn
-    </a>
+    <div class="d-flex gap-2 mb-3">
+        <a href="{{ route('admin.orders.index') }}" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-arrow-left"></i> Danh sách đơn
+        </a>
+        <a href="{{ route('admin.orders.print', $order) }}" class="btn btn-dark btn-sm" target="_blank">
+            <i class="bi bi-printer"></i> In bill K80
+        </a>
+    </div>
 
     <div class="row g-4">
         <div class="col-lg-8">
@@ -39,6 +44,9 @@
                         </tbody>
                         <tfoot>
                             <tr><td colspan="3" class="text-end">Tạm tính</td><td class="text-end">@vnd($order->subtotal)</td></tr>
+                            @if($order->discount > 0)
+                                <tr><td colspan="3" class="text-end">Giảm giá {{ $order->coupon_code }}</td><td class="text-end">-@vnd($order->discount)</td></tr>
+                            @endif
                             <tr><td colspan="3" class="text-end">Phí giao hàng</td><td class="text-end">@vnd($order->shipping_fee)</td></tr>
                             <tr class="fw-bold"><td colspan="3" class="text-end">Tổng cộng</td>
                                 <td class="text-end text-brand">@vnd($order->total)</td></tr>
@@ -54,7 +62,7 @@
                 <div class="card-body">
                     <p class="mb-1"><i class="bi bi-person"></i> {{ $order->customer_name }}</p>
                     <p class="mb-1"><i class="bi bi-telephone"></i> {{ $order->phone }}</p>
-                    <p class="mb-1"><i class="bi bi-geo-alt"></i> {{ $order->address }}</p>
+                    <p class="mb-1"><i class="bi bi-geo-alt"></i> {{ $order->fulfillment === 'takeaway' ? 'Nhận tại quán' : ($order->address ?: '—') }}</p>
                     @if($order->note)<p class="mb-1"><i class="bi bi-chat-left-text"></i> {{ $order->note }}</p>@endif
                     <p class="mb-0 text-muted small">Tài khoản: {{ $order->user->email ?? '—' }}</p>
                 </div>
@@ -66,7 +74,7 @@
                     <form action="{{ route('admin.orders.update', $order) }}" method="POST">
                         @csrf @method('PUT')
                         <select name="status" class="form-select mb-3">
-                            @foreach($statuses as $key => $label)
+                            @foreach($order->nextStatuses() as $key => $label)
                                 <option value="{{ $key }}" {{ $order->status === $key ? 'selected' : '' }}>{{ $label }}</option>
                             @endforeach
                         </select>

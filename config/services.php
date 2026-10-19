@@ -39,4 +39,10 @@ return [
         'key' => env('PEXELS_API_KEY'),
     ],
 
+    'vietqr' => [
+        'bank_id' => env('VIETQR_BANK_ID'),
+        'account_no' => env('VIETQR_ACCOUNT_NO'),
+        'account_name' => env('VIETQR_ACCOUNT_NAME'),
+    ],
+
 ];

@@ -16,13 +16,13 @@
         <aside class="lg:col-span-3">
             <div class="bg-surface-container-lowest rounded-xl p-sm shadow-soft lg:sticky lg:top-28">
                 <h3 class="text-label-md text-on-surface-variant uppercase tracking-wider px-md pt-sm pb-xs">Danh mục</h3>
-                <div class="flex lg:flex-col gap-xs overflow-x-auto hide-scrollbar">
+                <div class="flex lg:flex-col gap-xs overflow-x-auto hide-scrollbar snap-x snap-mandatory touch-pan-x">
                     <a href="{{ route('menu') }}"
-                       class="flex-none lg:flex-auto px-md py-sm rounded-full lg:rounded-lg text-body-md transition-all {{ !$activeCategory ? 'bg-primary-container text-on-primary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container' }}">
+                       class="flex-none snap-start lg:flex-auto px-md py-sm rounded-full lg:rounded-lg text-body-md transition-all whitespace-nowrap {{ !$activeCategory ? 'bg-primary-container text-on-primary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container' }}">
                         Tất cả món</a>
                     @foreach($categories as $cat)
                         <a href="{{ route('menu', ['category' => $cat->slug]) }}"
-                           class="flex-none lg:flex-auto px-md py-sm rounded-full lg:rounded-lg text-body-md transition-all whitespace-nowrap {{ $activeCategory && $activeCategory->id === $cat->id ? 'bg-primary-container text-on-primary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container' }}">
+                           class="flex-none snap-start lg:flex-auto px-md py-sm rounded-full lg:rounded-lg text-body-md transition-all whitespace-nowrap {{ $activeCategory && $activeCategory->id === $cat->id ? 'bg-primary-container text-on-primary-container font-bold' : 'text-on-surface-variant hover:bg-surface-container' }}">
                             {{ $cat->name }}</a>
                     @endforeach
                 </div>

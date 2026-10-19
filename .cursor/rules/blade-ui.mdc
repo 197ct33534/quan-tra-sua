@@ -1,0 +1,15 @@
+---
+description: Blade storefront, admin, in bill
+globs: "resources/views/**/*.blade.php"
+alwaysApply: false
+---
+
+# Blade
+
+- Storefront kế thừa `layouts.app`. Admin kế thừa `layouts.admin`. Không thêm UI kit mới.
+- Tiền hiển thị bằng `@vnd`. Label biến thể lấy từ hằng trên model, không hardcode phí size trên view.
+- Form POST có `@csrf`. Nút xóa có `@method('DELETE')` và confirm.
+- Trang in bill: view riêng, không navbar/sidebar. Khổ in khoảng 80mm, `@media print`, nút gọi `window.print()`. Nội dung pha chế gồm món, size, đường, đá hoặc mức cay, topping, số lượng, ghi chú.
+- Danh sách đơn admin poll 20 giây một endpoint JSON đơn mới. Chuông chỉ phát sau tương tác người dùng (trình duyệt chặn autoplay).
+- Trạng thái còn/hết là nút gạt trên list admin, gọi route cập nhật `is_available` / `is_active`.
+- CDN Tailwind/Bootstrap chỉ được gỡ khi chuyển asset sang Vite ở phase tối ưu. Đừng trộn hai việc đó vào một thay đổi nghiệp vụ.

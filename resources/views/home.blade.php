@@ -34,9 +34,9 @@
             <h2 class="text-headline-md text-on-surface">Danh mục</h2>
             <a href="{{ route('menu') }}" class="text-primary text-label-md hover:underline">Xem tất cả</a>
         </div>
-        <div class="flex gap-lg overflow-x-auto hide-scrollbar pb-base">
+        <div class="flex gap-lg overflow-x-auto hide-scrollbar snap-x snap-mandatory touch-pan-x pb-base">
             @foreach($categories as $i => $cat)
-                <a href="{{ route('menu', ['category' => $cat->slug]) }}" class="flex-none flex flex-col items-center gap-base group">
+                <a href="{{ route('menu', ['category' => $cat->slug]) }}" class="flex-none snap-start flex flex-col items-center gap-base group">
                     <div class="w-20 h-20 rounded-full flex items-center justify-center transition-all group-hover:scale-105 group-hover:shadow-soft {{ $catBgs[$i % count($catBgs)] }}">
                         <span class="material-symbols-outlined" style="font-size:32px">{{ $catIcons[$i % count($catIcons)] }}</span>
                     </div>

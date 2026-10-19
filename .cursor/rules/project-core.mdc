@@ -1,0 +1,25 @@
+---
+description: Stack, cấu trúc thư mục và phạm vi nghiệp vụ quán trà sữa
+alwaysApply: true
+---
+
+# Quán trà sữa — phạm vi
+
+Laravel 12, PHP 8.2, Blade, Eloquent, MySQL, session cart. Storefront Tailwind, admin Bootstrap 5. Tiền VND là số nguyên. Format bằng `@vnd($amount)`.
+
+Không tự cài Inertia, Livewire, React, Vue, Filament, Sanctum API, Redis, Zod/Yup, SDK VNPay/MoMo/ZaloPay, SMS OTP, API Grab/Ahamove. Tái sử dụng `CartService`, `layouts/app`, `layouts/admin`, `AdminMiddleware`, `Product::available()`, `Topping::active()`.
+
+```
+app/Http/Controllers/          storefront
+app/Http/Controllers/Admin/    quản trị
+app/Http/Controllers/Auth/
+app/Http/Requests/             FormRequest, attribute tiếng Việt
+app/Models/
+app/Services/                  CartService, tính tiền, VietQR
+resources/views/               Blade, không SPA
+routes/web.php                 route tiếng Việt hiện có
+```
+
+Đặt tên: controller số ít theo resource, route name chấm (`admin.orders.show`), cột tiền `*_fee` / `subtotal` / `total`.
+
+MVP đã chốt: guest checkout, tra cứu đơn bằng mã đơn + SĐT; đường 100/70/50/30/0 và đá 100/70/50/0 cho đồ uống; mức cay cho bánh tráng; size giá trong `product_sizes`; nhiều topping, giá snapshot lúc đặt; giao 15.000đ, miễn phí từ 150.000đ subtotal trước giảm giá, nhận tại quán 0đ và không bắt địa chỉ; coupon % hoặc số tiền, hạn dùng, đơn tối thiểu, một mã/đơn; COD hoặc VietQR (xác nhận tay); admin/staff; hủy đơn chỉ khi `pending` hoặc `confirmed`; chuông đơn + in bill K80; hết hàng chỉ là bật/tắt.

@@ -1,0 +1,27 @@
+---
+description: Công thức tính tiền, biến thể ly và VietQR
+globs: "app/Services/**/*.php,app/Http/Controllers/CheckoutController.php,app/Http/Controllers/CartController.php,app/Models/Order.php,app/Models/OrderItem.php"
+alwaysApply: false
+---
+
+# Tính tiền
+
+Đồ uống (`has_options`): bắt buộc `size`, `sugar` (100|70|50|30|0), `ice` (100|70|50|0), topping tùy chọn. Không có mức cay.
+
+Bánh tráng: không size/đường/đá. Bắt buộc `spice` (`none|mild|medium|hot` = Không cay / Cay ít / Cay vừa / Cay nhiều).
+
+```
+line       = (base_price + size_fee + sum(topping.price)) * qty
+subtotal   = sum(line)
+discount   = coupon trên subtotal, không vượt subtotal, không trừ ship
+shipping   = 0 nếu takeaway
+           = 0 nếu delivery và subtotal >= 150_000
+           = 15_000 nếu delivery và subtotal < 150_000
+total      = subtotal - discount + shipping
+```
+
+Ngưỡng miễn phí ship tính trước coupon. `takeaway` không bắt địa chỉ; `delivery` bắt địa chỉ. Ghi `fulfillment` (`delivery|takeaway`) và `payment_method` (`cod|vietqr`) lên `orders`. Khách vãng lai tra cứu bằng `order_code` + `phone`.
+
+VietQR: URL ảnh Napas/VietQR từ `config/services.php` (bin ngân hàng, số tài khoản, tên chủ TK trong `.env`). `amount` = `total`, `addInfo` = `order_code`. Không gọi API đối soát. Nhân viên xác nhận đã nhận tiền bằng tay.
+
+`rowId` giỏ gồm product, size, đường, đá hoặc mức cay, và danh sách topping đã sort. Cùng cấu hình thì cộng số lượng.

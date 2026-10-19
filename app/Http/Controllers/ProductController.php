@@ -12,7 +12,7 @@ class ProductController extends Controller
     {
         $product = Product::where('slug', $slug)
             ->available()
-            ->with('category')
+            ->with(['category', 'sizes'])
             ->firstOrFail();
 
         $toppings = $product->has_options

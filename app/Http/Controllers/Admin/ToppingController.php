@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Topping;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -15,6 +16,14 @@ class ToppingController extends Controller
         $toppings = Topping::orderBy('name')->get();
 
         return view('admin.toppings.index', compact('toppings'));
+    }
+
+    public function availability(Request $request, Topping $topping): JsonResponse
+    {
+        $request->validate(['active' => ['required', 'boolean']]);
+        $topping->update(['is_active' => $request->boolean('active')]);
+
+        return response()->json(['is_active' => $topping->is_active]);
     }
 
     public function create(): View

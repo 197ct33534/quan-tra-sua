@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -22,6 +23,14 @@ class ProductController extends Controller
             ->withQueryString();
 
         return view('admin.products.index', compact('products'));
+    }
+
+    public function availability(Request $request, Product $product): JsonResponse
+    {
+        $request->validate(['available' => ['required', 'boolean']]);
+        $product->update(['is_available' => $request->boolean('available')]);
+
+        return response()->json(['is_available' => $product->is_available]);
     }
 
     public function create(): View
