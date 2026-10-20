@@ -10,20 +10,18 @@
 @section('content')
 <div class="max-w-[1200px] mx-auto px-md md:px-lg">
     {{-- Hero --}}
-    <section class="mt-md relative rounded-xl overflow-hidden min-h-[420px] flex items-center shadow-soft
-                    bg-gradient-to-br from-primary-fixed via-primary-container to-secondary-container">
-        <div class="absolute -right-10 -bottom-10 opacity-30 hidden md:block">
-            <span class="material-symbols-outlined text-primary" style="font-size:340px">local_cafe</span>
-        </div>
+    <section class="mt-md relative rounded-xl overflow-hidden min-h-[420px] flex items-end md:items-center shadow-soft">
+        <img src="{{ asset('images/hero-tra-sua.jpg') }}" alt="Ly trà sữa trân châu" class="absolute inset-0 h-full w-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-surface/10 md:bg-gradient-to-r md:from-surface md:via-surface/85 md:to-transparent"></div>
         <div class="relative z-10 p-md md:p-xl max-w-[620px]">
-            <span class="inline-block px-md py-xs bg-surface/70 backdrop-blur rounded-full text-label-md text-on-primary-container mb-md">Tươi mới mỗi ngày 🧋</span>
+            <span class="inline-block px-md py-xs bg-surface/80 rounded-full text-label-md text-on-primary-container mb-md">Pha mới mỗi ngày</span>
             <h1 class="text-headline-xl text-on-surface mb-md">Tìm ly trà sữa hoàn hảo của bạn</h1>
-            <p class="text-body-lg text-on-surface-variant mb-lg max-w-[480px]">Trà sữa thơm béo, bánh tráng trộn chua cay & bánh tráng nướng giòn rụm — đặt online, giao tận nơi nhanh chóng.</p>
-            <div class="flex flex-wrap gap-md">
-                <a href="{{ route('menu') }}" class="px-lg py-md rounded-full bg-primary text-on-primary text-label-md font-bold shadow-soft hover:opacity-90 active:scale-95 transition-all">
+            <p class="text-body-lg text-on-surface-variant mb-lg max-w-[480px]">Trà sữa thơm béo, bánh tráng trộn chua cay và bánh tráng nướng giòn rụm. Đặt online, giao tận nơi hoặc nhận tại quán.</p>
+            <div class="flex flex-wrap gap-sm">
+                <a href="{{ route('menu', ['category' => 'tra-sua']) }}" class="inline-flex min-h-14 items-center px-xl rounded-full bg-primary text-on-primary text-body-lg font-bold shadow-soft hover:bg-[#6d3d4e] hover:-translate-y-0.5 active:scale-95 transition-all">
+                    Đặt trà sữa ngay</a>
+                <a href="{{ route('menu') }}" class="inline-flex min-h-14 items-center px-xl rounded-full border-2 border-secondary bg-surface/90 text-secondary text-body-lg font-bold hover:bg-secondary hover:text-on-secondary hover:-translate-y-0.5 active:scale-95 transition-all">
                     Xem thực đơn</a>
-                <a href="{{ route('menu', ['category' => $categories->first()->slug ?? '']) }}" class="px-lg py-md rounded-full border-2 border-secondary text-secondary text-label-md font-bold hover:bg-secondary-container/40 active:scale-95 transition-all">
-                    Món nổi bật</a>
             </div>
         </div>
     </section>
@@ -84,10 +82,10 @@
                         <span class="material-symbols-outlined">check_circle</span> {{ $point }}</li>
                 @endforeach
             </ul>
-            <a href="{{ route('menu') }}" class="inline-block px-lg py-md rounded-full bg-primary text-on-primary text-label-md font-bold shadow-soft hover:opacity-90 active:scale-95 transition-all">Đặt ngay</a>
+            <a href="{{ route('menu', ['category' => 'tra-sua']) }}" class="inline-flex min-h-14 items-center px-xl rounded-full bg-primary text-on-primary text-body-lg font-bold shadow-soft hover:bg-[#6d3d4e] hover:-translate-y-0.5 active:scale-95 transition-all">Đặt trà sữa ngay</a>
         </div>
-        <div class="flex-1 w-full h-[300px] rounded-xl overflow-hidden shadow-soft bg-gradient-to-br from-primary-container to-secondary-container flex items-center justify-center">
-            <span class="material-symbols-outlined text-on-primary-container" style="font-size:160px">local_cafe</span>
+        <div class="flex-1 w-full h-[300px] md:h-[360px] rounded-xl overflow-hidden shadow-soft">
+            <img src="{{ asset('images/pha-che.jpg') }}" alt="Không gian quán và quầy pha chế" class="h-full w-full object-cover">
         </div>
     </section>
 </div>

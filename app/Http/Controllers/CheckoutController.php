@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Services\CartService;
 use App\Services\PricingService;
+use App\Services\TelegramNotifier;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -92,6 +93,7 @@ class CheckoutController extends Controller
                     'sugar' => $item['sugar'] ?? null,
                     'ice' => $item['ice'] ?? null,
                     'spice' => $item['spice'] ?? null,
+                    'note' => $item['note'] ?? null,
                     'toppings' => $item['toppings'],
                     'options_fee' => $item['options_fee'],
                     'line_total' => $item['line_total'],
@@ -103,6 +105,7 @@ class CheckoutController extends Controller
 
         $this->cart->clear();
         $this->pricing->forgetCoupon();
+        app(TelegramNotifier::class)->notifyNewOrder($order);
         session(['recent_order' => [
             'code' => $order->order_code,
             'phone' => $order->phone,

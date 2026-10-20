@@ -109,6 +109,20 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Đã cập nhật giỏ hàng.');
     }
 
+    public function updateNote(Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'row_id' => ['required', 'string'],
+            'note' => ['nullable', 'string', 'max:200'],
+        ], [], [
+            'note' => 'ghi chú món',
+        ]);
+
+        $this->cart->updateNote($data['row_id'], $data['note'] ?? null);
+
+        return redirect()->route('cart.index')->with('success', 'Đã lưu ghi chú cho món.');
+    }
+
     public function remove(Request $request): RedirectResponse
     {
         $data = $request->validate([

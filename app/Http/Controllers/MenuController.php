@@ -29,8 +29,25 @@ class MenuController extends Controller
             $query->where('name', 'like', '%' . $request->q . '%');
         }
 
-        $products = $query->orderBy('sort_order')->paginate(12)->withQueryString();
+        // Lọc giá
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', (int) $request->min_price * 1000);
+        }
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', (int) $request->max_price * 1000);
+        }
 
-        return view('menu', compact('categories', 'products', 'activeCategory'));
+        // Sắp xếp
+        $sort = $request->get('sort', 'default');
+        $query = match ($sort) {
+            'price_asc'  => $query->orderBy('price'),
+            'price_desc' => $query->orderByDesc('price'),
+            'newest'     => $query->orderByDesc('created_at'),
+            default      => $query->orderBy('sort_order'),
+        };
+
+        $products = $query->paginate(12)->withQueryString();
+
+        return view('menu', compact('categories', 'products', 'activeCategory', 'sort'));
     }
 }

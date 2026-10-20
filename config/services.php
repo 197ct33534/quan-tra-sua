@@ -45,4 +45,9 @@ return [
         'account_name' => env('VIETQR_ACCOUNT_NAME'),
     ],
 
+    'telegram' => [
+        'bot_token' => env('TELEGRAM_BOT_TOKEN'),
+        'chat_id' => env('TELEGRAM_CHAT_ID'),
+    ],
+
 ];

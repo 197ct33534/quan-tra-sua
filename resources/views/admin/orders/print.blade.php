@@ -56,6 +56,9 @@
             @foreach($item->toppings ?? [] as $topping)
                 <div>+ {{ $topping['name'] ?? '' }}</div>
             @endforeach
+            @if($item->note)
+                <div>Ghi chú: {{ $item->note }}</div>
+            @endif
             <div class="row">
                 <span>x{{ $item->quantity }}</span>
                 <span>@vnd($item->line_total)</span>

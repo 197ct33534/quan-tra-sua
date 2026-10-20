@@ -24,6 +24,7 @@ Route::get('/san-pham/{slug}', [ProductController::class, 'show'])->name('produc
 Route::get('/gio-hang', [CartController::class, 'index'])->name('cart.index');
 Route::post('/gio-hang/them', [CartController::class, 'add'])->name('cart.add');
 Route::post('/gio-hang/cap-nhat', [CartController::class, 'update'])->name('cart.update');
+Route::post('/gio-hang/ghi-chu', [CartController::class, 'updateNote'])->name('cart.note');
 Route::post('/gio-hang/xoa', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/gio-hang/ma-giam-gia', [CartController::class, 'applyCoupon'])->name('cart.coupon.apply');
 Route::delete('/gio-hang/ma-giam-gia', [CartController::class, 'removeCoupon'])->name('cart.coupon.remove');

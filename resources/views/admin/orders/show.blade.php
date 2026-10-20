@@ -35,6 +35,9 @@
                                         @if(!empty($item->toppings))
                                             <small class="d-block text-muted">Topping: {{ collect($item->toppings)->pluck('name')->join(', ') }}</small>
                                         @endif
+                                        @if($item->note)
+                                            <small class="d-block text-muted">Ghi chú: {{ $item->note }}</small>
+                                        @endif
                                     </td>
                                     <td class="text-center">{{ $item->quantity }}</td>
                                     <td class="text-end">@vnd($item->unit_price)</td>

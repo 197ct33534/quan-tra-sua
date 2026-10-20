@@ -29,3 +29,6 @@
 @if($variantSummary !== '')
     <p class="text-label-sm text-on-surface-variant mt-xs">{{ $variantSummary }}</p>
 @endif
+@if(! empty($item['note']) && empty($hideNote))
+    <p class="text-label-sm text-on-surface mt-xs">Ghi chú: {{ $item['note'] }}</p>
+@endif

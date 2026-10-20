@@ -81,6 +81,7 @@ class CartService
                 'options_fee' => $optionsFee,
                 'unit_price' => $unitPrice,
                 'quantity' => $quantity,
+                'note' => null,
             ];
         }
 
@@ -102,6 +103,19 @@ class CartService
             $cart[$rowId]['quantity'] = $quantity;
             $cart[$rowId]['line_total'] = $cart[$rowId]['unit_price'] * $quantity;
         }
+
+        Session::put($this->key, $cart);
+    }
+
+    public function updateNote(string $rowId, ?string $note): void
+    {
+        $cart = $this->items();
+        if (! isset($cart[$rowId])) {
+            return;
+        }
+
+        $note = trim((string) $note);
+        $cart[$rowId]['note'] = $note === '' ? null : mb_substr($note, 0, 200);
 
         Session::put($this->key, $cart);
     }

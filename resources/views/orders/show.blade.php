@@ -54,6 +54,9 @@
                                     @foreach(($item->toppings ?? []) as $tp)
                                         <span class="px-sm py-1 bg-primary-container text-on-primary-container rounded-full text-label-sm">+ {{ $tp['name'] }}</span>
                                     @endforeach
+                                    @if($item->note)
+                                        <span class="px-sm py-1 bg-surface-container text-on-surface rounded-full text-label-sm">{{ $item->note }}</span>
+                                    @endif
                                 </div>
                             </div>
                             <span class="text-body-md text-primary whitespace-nowrap">@vnd($item->line_total)</span>

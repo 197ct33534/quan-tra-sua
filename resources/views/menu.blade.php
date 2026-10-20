@@ -31,6 +31,23 @@
 
         {{-- Products grid --}}
         <div class="lg:col-span-9">
+            <form method="GET" action="{{ route('menu') }}" class="mb-md flex flex-col gap-sm sm:flex-row">
+                @if(request('category'))
+                    <input type="hidden" name="category" value="{{ request('category') }}">
+                @endif
+                <label for="menu-q" class="sr-only">Tìm món</label>
+                <input id="menu-q" type="search" name="q" value="{{ request('q') }}" placeholder="Tìm trà sữa, bánh tráng..."
+                       class="min-h-11 flex-1 rounded-full border border-outline-variant/40 bg-surface-container-lowest px-md text-body-md">
+                <label for="menu-sort" class="sr-only">Sắp xếp</label>
+                <select id="menu-sort" name="sort" class="min-h-11 rounded-full border border-outline-variant/40 bg-surface-container-lowest px-md text-body-md">
+                    <option value="default" @selected($sort === 'default')>Phổ biến</option>
+                    <option value="price_asc" @selected($sort === 'price_asc')>Giá tăng dần</option>
+                    <option value="price_desc" @selected($sort === 'price_desc')>Giá giảm dần</option>
+                    <option value="newest" @selected($sort === 'newest')>Mới nhất</option>
+                </select>
+                <button type="submit" class="inline-flex min-h-11 items-center justify-center rounded-full bg-primary px-lg text-label-md font-bold text-on-primary">Lọc</button>
+            </form>
+
             @if($products->isEmpty())
                 <div class="bg-surface-container-low rounded-xl p-xl text-center text-on-surface-variant">
                     <span class="material-symbols-outlined mb-sm" style="font-size:48px">search_off</span>

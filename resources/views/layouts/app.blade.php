@@ -27,7 +27,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('head')
 </head>
-<body class="bg-background text-on-surface min-h-screen flex flex-col">
+@php($showStickyCart = $cartCount > 0 && ! request()->routeIs('cart.*', 'checkout.*'))
+@php($liftStickyCart = $showStickyCart && request()->routeIs('products.show'))
+<body class="bg-background text-on-surface min-h-screen flex flex-col {{ $liftStickyCart ? 'pb-40 md:pb-0' : ($showStickyCart ? 'pb-24 md:pb-0' : '') }}">
     @php($navClass = 'text-on-surface-variant hover:text-primary transition-colors text-body-md')
     @php($navActive = 'text-primary border-b-2 border-primary pb-1 font-bold text-body-md')
     <header class="bg-surface sticky top-0 z-50 shadow-soft w-full">
@@ -36,6 +38,11 @@
                 <span class="material-symbols-outlined" style="font-size:32px">local_cafe</span>
                 <span class="hidden sm:inline">{{ config('app.name') }}</span>
             </a>
+            <form action="{{ route('menu') }}" method="GET" class="hidden lg:flex items-center" role="search">
+                <label for="header-q" class="sr-only">Tìm món</label>
+                <input id="header-q" type="search" name="q" value="{{ request()->routeIs('menu') ? request('q') : '' }}" placeholder="Tìm món..."
+                       class="min-h-11 w-44 xl:w-56 rounded-full border border-outline-variant/40 bg-surface-container px-md text-body-md">
+            </form>
             <div class="hidden md:flex items-center gap-lg">
                 <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? $navActive : $navClass }}">Trang chủ</a>
                 <a href="{{ route('menu') }}" class="{{ request()->routeIs('menu') || request()->routeIs('products.show') ? $navActive : $navClass }}">Thực đơn</a>
@@ -82,6 +89,11 @@
             </div>
         </nav>
         <div id="mobile-nav" class="hidden md:hidden border-t border-outline-variant/30 px-md pb-md bg-surface">
+            <form action="{{ route('menu') }}" method="GET" class="pt-sm" role="search">
+                <label for="mobile-q" class="sr-only">Tìm món</label>
+                <input id="mobile-q" type="search" name="q" value="{{ request()->routeIs('menu') ? request('q') : '' }}" placeholder="Tìm trà sữa, bánh tráng..."
+                       class="min-h-11 w-full rounded-full border border-outline-variant/40 bg-surface-container px-md text-body-md">
+            </form>
             <div class="flex flex-col py-sm">
                 <a href="{{ route('home') }}" class="py-sm text-body-md {{ request()->routeIs('home') ? 'text-primary font-bold' : 'text-on-surface' }}">Trang chủ</a>
                 <a href="{{ route('menu') }}" class="py-sm text-body-md {{ request()->routeIs('menu') || request()->routeIs('products.show') ? 'text-primary font-bold' : 'text-on-surface' }}">Thực đơn</a>
@@ -126,22 +138,38 @@
             </div>
             <div class="flex flex-col gap-sm">
                 <h4 class="text-label-md text-on-surface font-bold uppercase tracking-wider">Liên hệ</h4>
-                <p class="text-on-surface-variant text-label-md flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">call</span> 0900 000 000</p>
-                <p class="text-on-surface-variant text-label-md flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">location_on</span> 123 Đường ABC, Q.1, TP.HCM</p>
+                <a href="tel:{{ preg_replace('/\s+/', '', config('shop.phone')) }}" class="text-on-surface-variant text-label-md flex items-center gap-xs hover:text-primary">
+                    <span class="material-symbols-outlined text-[18px]">call</span> {{ config('shop.phone') }}</a>
+                <a href="{{ config('shop.maps') }}" target="_blank" rel="noopener" class="text-on-surface-variant text-label-md flex items-start gap-xs hover:text-primary">
+                    <span class="material-symbols-outlined text-[18px]">location_on</span> {{ config('shop.address') }}</a>
             </div>
             <div class="flex flex-col gap-sm">
-                <h4 class="text-label-md text-on-surface font-bold uppercase tracking-wider">Theo dõi</h4>
-                <div class="flex gap-md text-primary">
-                    <span class="material-symbols-outlined cursor-pointer hover:scale-110 transition-transform">photo_camera</span>
-                    <span class="material-symbols-outlined cursor-pointer hover:scale-110 transition-transform">public</span>
-                    <span class="material-symbols-outlined cursor-pointer hover:scale-110 transition-transform">alternate_email</span>
+                <h4 class="text-label-md text-on-surface font-bold uppercase tracking-wider">Giờ mở cửa</h4>
+                <p class="text-on-surface-variant text-label-md flex items-center gap-xs"><span class="material-symbols-outlined text-[18px]">schedule</span> {{ config('shop.hours') }}</p>
+                <div class="flex gap-sm pt-xs">
+                    <a href="{{ config('shop.facebook') }}" target="_blank" rel="noopener" aria-label="Facebook" class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-surface text-primary hover:bg-primary hover:text-on-primary transition-colors">
+                        <span class="material-symbols-outlined">public</span></a>
+                    <a href="{{ config('shop.instagram') }}" target="_blank" rel="noopener" aria-label="Instagram" class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-surface text-primary hover:bg-primary hover:text-on-primary transition-colors">
+                        <span class="material-symbols-outlined">photo_camera</span></a>
+                    <a href="{{ config('shop.zalo') }}" target="_blank" rel="noopener" aria-label="Zalo" class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-surface text-primary hover:bg-primary hover:text-on-primary transition-colors">
+                        <span class="material-symbols-outlined">chat</span></a>
+                    <a href="{{ config('shop.maps') }}" target="_blank" rel="noopener" aria-label="Bản đồ" class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-surface text-primary hover:bg-primary hover:text-on-primary transition-colors">
+                        <span class="material-symbols-outlined">map</span></a>
                 </div>
             </div>
         </div>
         <div class="max-w-[1200px] mx-auto px-md md:px-lg pb-lg border-t border-outline-variant/20 pt-md">
-            <p class="text-center text-on-surface-variant text-label-md">© {{ date('Y') }} {{ config('app.name') }}. Demo Laravel · Thiết kế theo phong cách Boba Bliss.</p>
+            <p class="text-center text-on-surface-variant text-label-md">© {{ date('Y') }} {{ config('app.name') }}. Đặt online, giao tận nơi hoặc nhận tại quán.</p>
         </div>
     </footer>
+
+    @if($showStickyCart)
+        <a href="{{ route('cart.index') }}"
+           class="md:hidden fixed inset-x-4 z-40 flex min-h-12 items-center justify-between rounded-full bg-primary px-md text-on-primary shadow-soft {{ $liftStickyCart ? 'bottom-24' : 'bottom-4' }}">
+            <span class="text-label-md font-bold">Giỏ hàng · {{ $cartCount }} món</span>
+            <span class="text-label-md font-bold">Xem giỏ</span>
+        </a>
+    @endif
 
     @stack('scripts')
 </body>

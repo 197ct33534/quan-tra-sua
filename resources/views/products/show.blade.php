@@ -150,11 +150,11 @@
                 {{-- Quantity + Add --}}
                 <div class="mt-auto p-md bg-surface-container-high rounded-xl hidden md:flex items-center gap-md">
                     <div class="flex items-center bg-surface rounded-full p-xs border border-outline-variant">
-                        <button type="button" onclick="changeQty(-1)" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container transition-all active:scale-90">
+                        <button type="button" onclick="changeQty(-1)" class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-surface-container transition-all active:scale-90">
                             <span class="material-symbols-outlined">remove</span></button>
                         <input type="number" name="quantity" id="qty" value="1" min="1" max="50"
                                class="w-12 text-center bg-transparent border-none focus:ring-0 font-bold text-body-lg">
-                        <button type="button" onclick="changeQty(1)" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container transition-all active:scale-90">
+                        <button type="button" onclick="changeQty(1)" class="w-11 h-11 rounded-full flex items-center justify-center hover:bg-surface-container transition-all active:scale-90">
                             <span class="material-symbols-outlined">add</span></button>
                     </div>
                     <button type="submit" class="flex-grow bg-primary text-on-primary py-md rounded-full text-headline-sm flex items-center justify-center gap-sm hover:opacity-90 active:scale-[0.98] transition-all shadow-soft">
@@ -171,10 +171,10 @@
             <p id="sticky-price" class="text-headline-sm text-primary">@vnd((int) $product->price + $initialFee)</p>
         </div>
         <div class="flex items-center bg-surface-container rounded-full p-xs border border-outline-variant">
-            <button type="button" onclick="changeQty(-1)" class="w-9 h-9 rounded-full flex items-center justify-center" aria-label="Giảm số lượng">
+            <button type="button" onclick="changeQty(-1)" class="w-11 h-11 rounded-full flex items-center justify-center" aria-label="Giảm số lượng">
                 <span class="material-symbols-outlined">remove</span></button>
             <span id="sticky-qty" class="w-6 text-center font-bold">1</span>
-            <button type="button" onclick="changeQty(1)" class="w-9 h-9 rounded-full flex items-center justify-center" aria-label="Tăng số lượng">
+            <button type="button" onclick="changeQty(1)" class="w-11 h-11 rounded-full flex items-center justify-center" aria-label="Tăng số lượng">
                 <span class="material-symbols-outlined">add</span></button>
         </div>
         <button type="submit" form="product-form" class="flex-1 bg-primary text-on-primary py-sm rounded-full text-label-md font-bold">

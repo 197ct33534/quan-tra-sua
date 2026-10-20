@@ -72,8 +72,12 @@ class Product extends Model
             return Storage::url($this->image);
         }
 
-        // Ảnh placeholder khi sản phẩm chưa có hình
-        return 'https://placehold.co/400x300?text=' . urlencode($this->name);
+        $demo = 'images/products/'.$this->slug.'.jpg';
+        if (is_file(public_path($demo))) {
+            return asset($demo);
+        }
+
+        return asset('images/products/default-drink.jpg');
     }
 
     public function scopeAvailable($query)

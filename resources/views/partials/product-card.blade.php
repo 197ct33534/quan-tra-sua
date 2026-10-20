@@ -11,11 +11,11 @@
             <a href="{{ route('products.show', $product->slug) }}" class="hover:text-primary transition-colors">{{ $product->name }}</a>
         </h3>
         <p class="text-body-md text-on-surface-variant mb-md flex-grow line-clamp-2">{{ Str::limit($product->description, 60) }}</p>
-        <div class="flex justify-between items-center">
-            <span class="text-headline-md text-primary">@vnd($product->price)</span>
+        <div class="mt-auto flex flex-col gap-sm">
+            <span class="text-headline-sm text-primary">@vnd($product->price)</span>
             <a href="{{ route('products.show', $product->slug) }}"
-               class="bg-secondary-container text-secondary w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary hover:text-on-secondary transition-all active:scale-90">
-                <span class="material-symbols-outlined">add</span>
+               class="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-primary px-md text-label-md font-bold text-on-primary hover:opacity-90 active:scale-[0.98] transition-all">
+                {{ $product->has_options ? 'Chọn món' : 'Thêm' }}
             </a>
         </div>
     </div>

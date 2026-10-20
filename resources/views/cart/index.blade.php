@@ -30,18 +30,27 @@
                                     <h3 class="text-headline-sm text-on-surface">{{ $item['name'] }}</h3>
                                     <span class="text-headline-sm text-primary whitespace-nowrap">@vnd($item['line_total'])</span>
                                 </div>
-                                @include('partials.cart-variant-summary', ['item' => $item])
+                                @include('partials.cart-variant-summary', ['item' => $item, 'hideNote' => true])
+                                <form action="{{ route('cart.note') }}" method="POST" class="mt-sm">
+                                    @csrf
+                                    <input type="hidden" name="row_id" value="{{ $rowId }}">
+                                    <label class="sr-only" for="note-{{ $rowId }}">Ghi chú cho {{ $item['name'] }}</label>
+                                    <input id="note-{{ $rowId }}" type="text" name="note" value="{{ $item['note'] ?? '' }}" maxlength="200"
+                                           placeholder="Ghi chú ly này: ít ngọt, không ống hút..."
+                                           class="min-h-11 w-full rounded-lg border border-outline-variant/40 bg-surface-container px-sm text-label-md"
+                                           onchange="this.form.submit()">
+                                </form>
                             </div>
                             <div class="flex justify-between items-center mt-md">
                                 <form action="{{ route('cart.update') }}" method="POST" class="flex items-center bg-surface-container rounded-full px-xs py-xs border border-outline-variant/40">
                                     @csrf
                                     <input type="hidden" name="row_id" value="{{ $rowId }}">
-                                    <button type="button" onclick="stepQty(this,-1)" class="w-8 h-8 flex items-center justify-center text-primary hover:bg-white rounded-full transition-all">
-                                        <span class="material-symbols-outlined text-[18px]">remove</span></button>
+                                    <button type="button" onclick="stepQty(this,-1)" aria-label="Giảm số lượng" class="flex h-11 w-11 items-center justify-center rounded-full text-primary hover:bg-white transition-all">
+                                        <span class="material-symbols-outlined">remove</span></button>
                                     <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="0" max="50"
                                            class="w-10 text-center bg-transparent border-none focus:ring-0 font-bold" onchange="this.form.submit()">
-                                    <button type="button" onclick="stepQty(this,1)" class="w-8 h-8 flex items-center justify-center text-primary hover:bg-white rounded-full transition-all">
-                                        <span class="material-symbols-outlined text-[18px]">add</span></button>
+                                    <button type="button" onclick="stepQty(this,1)" aria-label="Tăng số lượng" class="flex h-11 w-11 items-center justify-center rounded-full text-primary hover:bg-white transition-all">
+                                        <span class="material-symbols-outlined">add</span></button>
                                 </form>
                                 <form action="{{ route('cart.remove') }}" method="POST">
                                     @csrf
@@ -98,7 +107,7 @@
                         Tiến hành đặt hàng <span class="material-symbols-outlined">arrow_forward</span></a>
                     <div class="mt-md flex items-center justify-center gap-xs text-on-surface-variant opacity-60">
                         <span class="material-symbols-outlined text-[16px]">lock</span>
-                        <span class="text-label-sm">Đặt hàng an toàn · Thanh toán COD</span>
+                        <span class="text-label-sm">Đặt hàng an toàn · COD hoặc chuyển khoản VietQR</span>
                     </div>
                 </div>
             </aside>

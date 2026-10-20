@@ -21,7 +21,7 @@ class OrderItem extends Model
     protected $fillable = [
         'order_id', 'product_id', 'product_name', 'unit_price',
         'quantity', 'size', 'sugar', 'ice', 'spice',
-        'toppings', 'options_fee', 'line_total',
+        'toppings', 'options_fee', 'line_total', 'note',
     ];
 
     protected $casts = [
